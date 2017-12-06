@@ -7,7 +7,7 @@ git install config from:
 
 # Key binding
 
-The following key are all prefixed with <prefix>, which is configured in .tmux.conf or .tmux.conf.local
+The following key are all prefixed with prefix, which is configured in .tmux.conf or .tmux.conf.local
 
 ## session
 Operation              | Key binding
@@ -21,9 +21,9 @@ rename current session | $
 Operation                    | Key binding
 ----------------------       | ------------
 new window                   | c
-switch to last active window | <space>
+switch to last active window | space
 close a window               | &
-siwtch to window number      | <window number>
+siwtch to window number      | window number
 
 ## pane
 Operation                           | Key binding
@@ -35,7 +35,7 @@ horizontal split new pane           | "
 maximize/minimize current pane      | z
 jump between pane                   | h/j/k/l
 resize pane                         | H/J/K/L
-swap pane                           | </>
+swap pane                           | \</\>
 maximize current pane to new window | +
 
 ## copy mode
