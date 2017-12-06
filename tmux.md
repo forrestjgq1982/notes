@@ -98,7 +98,7 @@ n/a                            | H/L/K/D | Resize the current pane in steps of t
 
 default   | new      | Key binding
 --------- | -------- | ------------
--         |          | Delete the most recently copied buffer of text.
+\-        |          | Delete the most recently copied buffer of text.
 =         | or P     | Choose which buffer to paste interactively from a list.
 [         | or enter | Enter copy mode to copy text or view the history.
 ]         | or p     | Paste the most recently copied buffer of text.
