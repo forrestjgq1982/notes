@@ -30,20 +30,20 @@ D         |     | Choose a client to detach.
 d         |     | Detach the current client.
 r         |     | Force redraw of the attached client.
 t         |     | Show the time.
-          | c-l | clear both screen and history(clear-history)
+n/a       | c-l | clear both screen and history(clear-history)
 
 
 ## session
-default    | new | Key binding
----------  | --- | ------------
-(          |     | Switch the attached client to the previous session.
-)          |     | Switch the attached client to the next session.
-L          |     | Switch the attached client back to the last session.
-s          |     | Select a new session for the attached client interactively.
-$          |     | Rename the current session.
-           | C-c | new session
-           | C-f | find session by name
-           | m   | toggle mouse
+default   | new | Key binding
+--------- | --- | ------------
+(         |     | Switch the attached client to the previous session.
+)         |     | Switch the attached client to the next session.
+L         |     | Switch the attached client back to the last session.
+s         |     | Select a new session for the attached client interactively.
+$         |     | Rename the current session.
+n/a       | C-c | new session
+n/a       | C-f | find session by name
+n/a       | m   | toggle mouse
 
 
 
@@ -62,7 +62,7 @@ i         |     | Display some information about the current window.
 l         |     | Move to the previously selected window.
 n         | C-h | Change to the next window.
 p         | C-l | Change to the previous window.
-          | TAB | Change to the last window.
+n/a       | TAB | Change to the last window.
 w         |     | Choose the current window interactively.
 ~         |     | Show previous messages from tmux, if any.
 Space     |     | Arrange the current window in the next preset layout.
@@ -87,11 +87,11 @@ M-1 to M-5                     |         | Arrange panes in one of the five pres
 M-o                            |         | Rotate the panes in the current window backwards.
 C-Up, C-Down, C-Left, C-Right  |         | Resize the current pane in steps of one cell.
 M-Up, M-Down, M-Left, M-Right  |         | Resize the current pane in steps of five cells.
-                               | >       | swap current pane with next one
-                               | <       | swap current pane with previous one
-                               | +       | Maximize current pane
-                               | z       | Tmp Maximize current pane
-                               | H/L/K/D | Resize the current pane in steps of two cells.
+n/a                            | >       | swap current pane with next one
+n/a                            | <       | swap current pane with previous one
+n/a                            | +       | Maximize current pane
+n/a                            | z       | Tmp Maximize current pane
+n/a                            | H/L/K/D | Resize the current pane in steps of two cells.
 
 ## copy-mode
 
