@@ -1,3 +1,5 @@
+[toc]
+
 # Install
 ubuntu:
 >sudo apt install tmux
