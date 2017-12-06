@@ -1,0 +1,14 @@
+[https]
+	proxy = socks5://192.168.2.19:1080
+[http]
+	proxy = socks5://192.168.2.19:1080
+[user]
+	email = mr.jianggq@gmail.com
+	name = forrestjgq
+[gui]
+	recentrepo = F:/src/compiler/dragon
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+	br = branch
