@@ -1,4 +1,3 @@
-[toc]
 
 # Install
 ubuntu:
@@ -103,7 +102,7 @@ default   | new      | Key binding
 =         | or P     | Choose which buffer to paste interactively from a list.
 [         | or enter | Enter copy mode to copy text or view the history.
 ]         | or p     | Paste the most recently copied buffer of text.
-#         | or b     | List all paste buffers.
+\#        | or b     | List all paste buffers.
 
 
 
