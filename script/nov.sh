@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# this is used to get nov from http://www.wutuxs.com
+# the nov html can be downloaded by
+# wget -r -np -nd URL
+# <td class="L"><a href="/html/6/6132/4497377.html">1、 一重浪灭一重生</a></td>
+# then get filename and title into urls file
+
+
 path=`pwd`
 dir=`basename $path`
 txt=$dir.txt
