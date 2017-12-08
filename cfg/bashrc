@@ -1,0 +1,10 @@
+
+# svn operation
+alias rvt='svn revert -R'
+alias sup='svn up'
+# git operation
+alias push='git push -u origin master'
+alias pull='git pull origin master'
+
+alias ggc="ssh -i ~/.ssh/google-ssh-key-mrjgq jianggq@107.167.183.202"
+
