@@ -1,0 +1,18 @@
+
+set number
+set nospell
+
+
+" NerdTree {
+    if isdirectory(expand("~/.vim/bundle/nerdtree"))
+        let NERDTreeKeepTreeInNewTab=0
+    endif
+" }
+
+nmap <SPACE> <C-F>
+
+"autocmd BufEnter *.txt set guifont=Source\ Code\ Pro\12
+autocmd BufEnter *.txt set nohls wrap nonu
+autocmd BufNewFile * set ff=unix
+set ff=unix
+set nospell
