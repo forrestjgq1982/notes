@@ -134,6 +134,7 @@ do
 done
 
 cd -
-
-echo "Book $title generated to $bid/$txt"
+mkdir -p target
+cp $bid/$txt target/
+echo "Book $title generated to target/$txt"
 
