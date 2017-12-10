@@ -1,0 +1,20 @@
+{
+    "configs": [
+        {
+            "method": "aes-256-cfb",
+            "password": "jianggq1982",
+            "remarks": "东亚HTTP",
+            "server": "107.167.183.202",
+            "server_port": 1398
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "jianggq1982",
+            "remarks": "东亚C",
+            "server": "35.189.169.16",
+            "server_port": 12345
+        }
+    ],
+    "localPort": 1080,
+    "shareOverLan": false
+}
