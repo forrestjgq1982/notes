@@ -16,3 +16,13 @@ autocmd BufEnter *.txt set nohls wrap nonu
 autocmd BufNewFile * set ff=unix
 set ff=unix
 set nospell
+colorscheme monokain
+set background=dark
+nnoremap <F10> :setlocal nu! list! paste!<CR>
+nnoremap <leader>jp :lprevious<CR>
+nnoremap <leader>jn :lnext<CR>
+nnoremap <leader>jf :lfirst<CR>
+nnoremap <leader>je :Errors<CR>
+nnoremap <leader>jc :lclose<CR>
+
+
