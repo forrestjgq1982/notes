@@ -169,3 +169,10 @@ Keys        | Action
 ----        | ------
 <range>!cmd | execute shell cmd in <range>, like 12,19!sort|uniq
 
+# key mapping
+
+To generate a mapping list file:
+>:redir >> ~/mymaps.txt
+>:map
+>:redir END
+
