@@ -1,11 +1,17 @@
-# Editing
+# Global
+Cmd | Action
+--- | ------
+scriptnames | show all \*.vim script file full path vim using
+
+# Normal mode
 ## File operation
 Keys  | Action
 ----  | ------
 ZZ    | = wq
-e!    | reload last save even modified
-e     | reload if not dirty
+:e!    | reload last save even modified
+:e     | reload if not dirty
 <C-^> | Switching back to previous file
+:r | read in from some file
 
 
 ## Motions
@@ -24,37 +30,73 @@ e/E   | end of word
 {/}   | beginning of current /next paragraph
 [[/]] | beginning of current/next section
 
+## Text Object
+key | object
+--- | ------
+aw  | a word with spaces after word
+iw  | a word without spaces after word
+as  | a sentence with spaces after word
+is  | a sentence without spaces after word
+
 ## Movements
 Keys        | Action
 ----        | ------
 w/W         | Next words header
 b/B         | Prev words header
 gg          | move to last line
-<n>gg       | move to line <n>
-G           | =gg
+G           | move the last line
+<n>gg/G     | move to line <n>
 ''          | go back to the line where gg start, or previous mark
-``          | go back to the char where gg start, or previous mark
+\`\`        | go back to the char where gg start, or previous mark
 m<ch>       | mark a position
 '<ch>       | move to the first char of marking position
 `<ch>       | move to the marking position
+<C-o>/<C-i> | jump back/forward
+TAB         | = <C-i>
+:jumps | list all jumpable positions
 ^F, ^B      | Scroll one screen forward/backward
 ^D, ^U      | Scroll half screen down/up
 ^E, ^Y      | Scroll one line up/down, not quite useful and replaced by spf13
 z<cr>/z./z- | move current line to the top/center/bottom of screen
 <n>z<cr>    | move line <n> to the top of screen and go to that line
 ^L          | Redraw screen
-<n>\|       | move to column n of current line, default n==1
+<n>\        |                                                                 | move to column n of current line, default n==1
 `.          | move to last change in file
 '.          | move to start of line of last change in file
 
 The next command is not effective in spf13:
+
 Keys    | Action
-----    | ------
+------- | ------
 H/M/L   | top/middle/last within current screen, (M seems working)
 +/-     | First char of next/prev line
 ENTER=+ | seems not working
 
 ## Modify
+### Basic operation
+Keys | Action
+---- | -----------------------------
+i    | insert before curr cursor
+I    | insert before non-blank head of line
+a    | append after curr cursor
+A    | append after eol
+c    | change some object or motion
+d    | delete some object or motion
+r    | replace current char
+R    | enter replacement mode
+~    | change case of current char, and move to next char
+
+### Short cut
+keys | refers to | action
+---- | --------- | ------------------
+s    | cl        | change current char
+S    | cc        | change whole line
+C    | c$        | change to eol
+x    | dl        | delete current char
+X    | dh        | delete prev char
+D    | d$        | delete to eol
+
+
 Keys                  | Action
 ----                  | ------
 i/I/a/A               | insert or append
@@ -65,15 +107,18 @@ i/I/a/A               | insert or append
 <n>d<m>               | delete from current char
 <n>dd                 | delete lines
 <n>D                  | =d$j<n-1>dd
-x                     | delete current char
-X                     | delete prev char
 
 ## Search and replacement
 hint:
 >believe or not, <n>r == <n>R if only one char is replaced
 
+word matching:
+- "\>" matches the end of the word in searching, so ***/the\>*** will search for the word end with 'the' only, and will not match 'there', but "soothe" is a legal match.
+- similarly, "\<" will match the start of a word, so "/\<the\>" will match the word "the" only
+
+
 Keys                    | Action
-----                    | ------
+----------------------- | ------
 <n>r                    | replace a char without enter insert mode
 R                       | enter replace mode and replace one by one until ESC
 <n>s                    | similar as r, but it delete a few chars and enter insert mode
@@ -94,12 +139,18 @@ t/T                     | search char before/after f/F
 ;/,                     | repeat previous finding in same/opposite direction
 <range>s/old/new/[g][c] | replace
 
+options                 | Action
+----------------------- | ------
+ic                      | ignore case search
+is                      | increment search
+ws                      | NOT stop at EOF in search next, or at begin of file in searching previous
+
 <range> can be :
 - a pattern search, like g/pattern/s/old/new/g
 - % for global
 - global match pattern and only replace in the matched lines
 
-## Clipboard
+# Clipboard
 <m> can be:
 - h/l to copy char after/before
 - j/k to copy next/prev line and current line
@@ -114,8 +165,10 @@ xp      | exchange 2 chars
 "<ch>y  | yank to name buffer
 "<ch>p  | put from name buffer
 "<CH>y  | yank to append
+"\*y    | yank to system clipboard
+"\*p    | paste from system clipboard
 
-## History
+# History
 Keys  | Action
 ----  | ------
 u     | undo once
@@ -124,7 +177,7 @@ U     | undo the modify in current line
 <n>.  | repeat last editing
 
 
-## ex mode
+# ex mode
 Keys             | Action
 ----             | ------
 <n>              | print line <n>
@@ -152,6 +205,12 @@ pattern:
 <range> can be a pattern:
 - g/pattern/d will delete all lines matching the pattern
 
+# Visual Mode
+Keys        | Action
+----        | ------
+o | switch to the other end of selection
+O | in block selection, move to the other end of current line
+
 # Customizing
 ## set option
 ### toggle options
@@ -175,4 +234,6 @@ To generate a mapping list file:
 >:redir >> ~/mymaps.txt
 >:map
 >:redir END
+
+# Plugins
 
