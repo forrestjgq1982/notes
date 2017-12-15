@@ -149,6 +149,7 @@ q       | end macro recording
 ## Search and Replace
 ### Operations
 For search, the operations are:
+
 Keys       | Action
 ---------- | -----------------------------------------------------------------
 \*, #      | search forward/backward for word under cursor, match exact words
@@ -166,6 +167,7 @@ n/N        | repeat in same/opposite direction
 ,          | repeat previous finding in opposite direction
 
 For replacement, the operations are:
+
 Keys | Action
 ---- | -----------------------------------------------------------------
 <n>r | replace a char without enter insert mode
@@ -252,8 +254,9 @@ tab <cmd>    | n/a   | open new tab and exe <cmd>
 
 # Visual mode
 ## Common in all visual mode
+
 key | action
---- | -----
+--- | -----------------------------------------------------------------
 c   | will change selected block
 C   | will change from the selection to eol
 D   | will delete to eol
@@ -270,7 +273,7 @@ supported motions:
 >iw, aw, is, as, ip, ap
 
 key | action
---- | -----
+--- | --------------------------------------------------------------------------
 \>  | shift lines covered by selection to right and fill with spaces, see option 'shiftwidth'
 \<  | shift lines covered by selection to remove left spaces
 ## Visual line mode
@@ -278,8 +281,9 @@ key | action
 ## Visual blcok mode
 ### operation
 after select a block:
+
 key | action
---- | -----
+--- | -------------------------------------------------------
 $   | will extend all selection to eol.
 I   | string}<esc> to insert text in each covered line
 A   | will append text in each convered line
@@ -295,7 +299,7 @@ U   | make uppercase
 r   | fill block with same char
 \>  | shift block to right and fill with spaces, see option 'shiftwidth'
 \<  | shift block to remove left spaces
-J | join all lines covered by selected block
+J   | join all lines covered by selected block
 
 
 
@@ -325,6 +329,7 @@ P       | paste before current char, or current line if target is line based
 xp      | exchange 2 chars
 
 # History
+
 Keys  | Action
 ----- | ----------------------------------------------
 u     | undo once
@@ -335,7 +340,7 @@ U     | undo the modify in current line
 
 # ex mode
 Keys         | Action
-----         | ----------------------------------------------
+------------ | ----------------------------------------------
 <n>          | print line <n>
 <m>,<n>      | print from line <m> to line <n>
 Q            | enter ex mode
@@ -346,8 +351,9 @@ vi           | exit ex mode and back to visual mode
 <r>#         | tmp display contents
 
 line number:
+
 Keys        | Action
-----        | ----------------------------------------------
+----------- | ----------------------------------------------
 :=          | print total line number
 :.=         | print current line number
 :/pattern/= | print first matching line number
@@ -362,10 +368,10 @@ pattern:
 - g/pattern/d will delete all lines matching the pattern
 
 # Visual Mode
-Keys        | Action
-----        | ----------------------------------------------
-o | switch to the other end of selection
-O | in block selection, move to the other end of current line
+Keys | Action
+---- | ----------------------------------------------
+o    | switch to the other end of selection
+O    | in block selection, move to the other end of current line
 
 # Customizing
 ## set option
@@ -394,44 +400,46 @@ hint:
 
 
 option      | shortcut | Action
----------   | -------- | ------------------------------------
+----------- | -------- | ------------------------------------
 whichwrap   | ww       | set keys to wrap around lines
 background  | bg       | set background color type(dark or light)
 colorscheme | colo     | set color scheme of vim
 syntax      | syn      | set highlight option(ON/OFF) for current buffer
 patchmode   | pm       | save the original file to backup as .orig
+textwidth   | tw       | max width of text line, 0 to disable
 
 ## command
-option    | short | action
---------- | ----- | ------------------------------------
-<r>!cmd   | n/a   | exe shell cmd in <r>, like 12,19!sort         | uniq
-syntax    | sy    | set highlight option(enable/clear/off/manual)
-<r>TOhtml | n/a   | turn current buffer to html file
-edit!     | e!    | reload last save even modified
-edit      | e     | reload if not dirty
-read      | r     | read in from some file
-next      | n     | switch to next file to edit
-previous  | prev  | switch to previous file to edit
-file <name>  | f  | rename current file
-saveas <name> | sav | save current file as <name> and edit <name>
+option        | short | action
+------------- | ----- | ------------------------------------
+<r>!cmd       | n/a   | exe shell cmd in <r>, like 12,19!sort
+syntax        | sy    | set highlight option(enable/clear/off/manual)
+<r>TOhtml     | n/a   | turn current buffer to html file
+edit!         | e!    | reload last save even modified
+edit          | e     | reload if not dirty
+read          | r     | read in from some file
+next          | n     | switch to next file to edit
+previous      | prev  | switch to previous file to edit
+file <name>   | f     | rename current file
+saveas <name> | sav   | save current file as <name> and edit <name>
 
 ## key mapping
 
 To generate a mapping list file:
->:redir >> ~/mymaps.txt
->:map
->:redir END
+
+> :redir >> ~/mymaps.txt
+> :map
+> :redir END
 
 ## Plugins
 
 # Help
 command         | comments
--------         | ------------
+--------------- | ------------------------------------------
 options         | show all support options
 help '<option>' | show option help
 set <option>?   | query option value
 set <option>&   | set default option value
 set all         | will display the complete list of options
 help E<errno>   | show help info for error E<errno>
-help :<cmd>   | show help info for command <cmd>
+help :<cmd>     | show help info for command <cmd>
 
