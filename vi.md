@@ -3,18 +3,18 @@
 tag   | description
 ---   | -----------------------------------------------------------------------
 {n}   | count, a number used to imply how many times to execute
-<c>   | a character, from a to z
-<C>   | a character, from A to Z
-<d>   | a digit, from 0 to 9
-<r>   | range of line, like 12,40 implies line 12 to line 40, % for all file range
-<m>   | motion, like word(w/e), find(f/t)...
-<t>   | text object, like 'aw' for a word
-<X/Y> | tag <X> or tag <Y>, like <m/t> implies motion or text object
-<cr>  | line breaking char like 0x0D, 0x0A, or 0x0D0x0A
-<C-X> | Control + X key binding
-<f>   | file name
+{c}   | a character, from a to z
+{C}   | a character, from A to Z
+{d}   | a digit, from 0 to 9
+{r}   | range of line, like 12,40 implies line 12 to line 40, % for all file range
+{m}   | motion, like word(w/e), find(f/t)...
+{t}   | text object, like 'aw' for a word
+{X/Y} | tag {X} or tag {Y}, like {m/t} implies motion or text object
+{cr}  | line breaking char like 0x0D, 0x0A, or 0x0D0x0A
+{C-X} | Control + X key binding
+{f}   | file name
 
-specially, <bar> represents char '|' to avoid conflicting with table seperator.
+specially, {bar} represents char '|' to avoid conflicting with table seperator.
 
 
 # Global
@@ -27,7 +27,7 @@ scriptnames | show all \*.vim script file full path vim using
 Keys    | Action
 ----    | ----------------------------------------------
 ZZ      | = wq
-<C-^/6> | Switching back to previous file
+{C-^/6} | Switching back to previous file
 
 
 ## Motions
@@ -61,25 +61,25 @@ w/W         | Next words header
 b/B         | Prev words header
 gg          | move to last line
 G           | move the last line
-<n>gg/G     | move to line <n>
+{n}gg/G     | move to line {n}
 ''          | go back to the line where gg start, or previous mark
 \`\`        | go back to the char where gg start, or previous mark
-m<c>        | mark a position
-'<c>        | move to the first char of marking position
-`<c>        | move to the marking position
-m<C>        | global mark
-'<C>        | global mark jump to line
-`<C>        | global mark jump to position
-<C-o>/<C-i> | jump back/forward
-TAB         | = <C-i>
+m{c}        | mark a position
+'{c}        | move to the first char of marking position
+`{c}        | move to the marking position
+m{C}        | global mark
+'{C}        | global mark jump to line
+`{C}        | global mark jump to position
+{C-o}/{C-i} | jump back/forward
+TAB         | = {C-i}
 :jumps      | list all jumpable positions
 ^F, ^B      | Scroll one screen forward/backward
 ^D, ^U      | Scroll half screen down/up
 ^E, ^Y      | Scroll one line up/down, not quite useful and replaced by spf13
-z<cr>/z./z- | move current line to the top/center/bottom of screen
-<n>z<cr>    | move line <n> to the top of screen and go to that line
+z{cr}/z./z- | move current line to the top/center/bottom of screen
+{n}z{cr}    | move line {n} to the top of screen and go to that line
 ^L          | Redraw screen
-<n>\<bar>   | move to column n of current line, default n==1
+{n}\{bar}   | move to column n of current line, default n==1
 `.          | move to last change in file
 '.          | move to start of line of last change in file
 `"          | move to last position of
@@ -120,31 +120,31 @@ D    | d$        | delete to eol
 Keys                  | Action
 --------------------- | --------------------------------------------------------------------------------------
 i/I/a/A               | insert or append
-<n>i/I/a/A<edit><esc> | will repeat the whole editing
-<n>o                  | Insert and goto new line after this, if <n> > 1, multi line share same content
-<n>O                  | Insert and goto new line before this
-<n>J                  | Join line, if <n> > 1, it is not join <n> times, it joins <n> lines
-<n>d<m>               | delete from current char
-<n>dd                 | delete lines
-<n>D                  | =d$j<n-1>dd
+{n}i/I/a/A{edit}{esc} | will repeat the whole editing
+{n}o                  | Insert and goto new line after this, if {n} \> 1, multi line share same content
+{n}O                  | Insert and goto new line before this
+{n}J                  | Join line, if {n} \> 1, it is not join {n} times, it joins {n} lines
+{n}d{m}               | delete from current char
+{n}dd                 | delete lines
+{n}D                  | =d$j{n-1}dd
 
 ### Automation
 
 macro recording actually put all actions into register as text,
-so when you put it with "<c>p you will see the command sequence.
+so when you put it with "{c}p you will see the command sequence.
 
 as a matter of fact, you may also yank command sequence to register,
-then directly play it with @<c> without recording.
+then directly play it with @{c} without recording.
 
-the only problem is that you may not be able to enter <esc> as char.
-but it can be achieved by <C-V><esc>.
+the only problem is that you may not be able to enter {esc} as char.
+but it can be achieved by {C-V}{esc}.
 
 Keys    | Action
 ------- | -------------------------------------
-q<c>    | start macro recording to register <c>
+q{c}    | start macro recording to register {c}
 q       | end macro recording
-<n>@<c> | play recorded macro at register <c>
-<n>@@   | repeat previous @<c>
+{n}@{c} | play recorded macro at register {c}
+{n}@@   | repeat previous @{c}
 
 ## Search and Replace
 ### Operations
@@ -156,13 +156,13 @@ Keys       | Action
 g\* ,g#    | search forward/backward for word under cursor, not match exact words
 /pattern   | search forwards
 ?pattern   | search backwards
-/<cr>      | repeat searching forwards
-?<cr>      | repeat searching backwards
+/{cr}      | repeat searching forwards
+?{cr}      | repeat searching backwards
 n/N        | repeat in same/opposite direction
-<n>f<ch>   | search forward next occurrence of <ch> in line
-<n>F<ch>   | search backward next occurrence of <ch> in line
-<n>t<ch>   | search forward the char before f
-<n>T<ch>   | search backward the char after F
+{n}f{ch}   | search forward next occurrence of {ch} in line
+{n}F{ch}   | search backward next occurrence of {ch} in line
+{n}t{ch}   | search forward the char before f
+{n}T{ch}   | search backward the char after F
 ;          | repeat previous finding in same direction
 ,          | repeat previous finding in opposite direction
 
@@ -170,14 +170,14 @@ For replacement, the operations are:
 
 Keys | Action
 ---- | -----------------------------------------------------------------
-<n>r | replace a char without enter insert mode
+{n}r | replace a char without enter insert mode
 R    | enter replace mode and replace one by one until ESC
-<n>s | similar as r, but it delete a few chars and enter insert mode
-<n>S | delete few lines and enter insert mode
+{n}s | similar as r, but it delete a few chars and enter insert mode
+{n}S | delete few lines and enter insert mode
 S    | replace while line, keep it emtpy
 
 hint:
->believe or not, <n>r == <n>R if only one char is replaced
+>believe or not, {n}r == {n}R if only one char is replaced
 
 ### Commands
 commands for searching:
@@ -186,30 +186,30 @@ Command    | Action
 ---------- | -------------------------
 /pattern   | search forwards
 ?pattern   | search backwards
-/<cr>      | repeat searching forwards
-?<cr>      | repeat searching backwards
+/{cr}      | repeat searching forwards
+?{cr}      | repeat searching backwards
 
 commands for substitution:
-> :<r>s/old/new/[gcp]
+> :{r}s/old/new/[gcp]
 
 here '/' is the delim to seperate command parts, but it can be any
 char else, so the next command is also legal:
-> :<r>s@old@new@[gcp]
+> :{r}s@old@new@[gcp]
 
 word matching:
-- "\>" matches the end of the word in searching, so ***/the\>*** will search for the word end with 'the' only, and will not match 'there', but "soothe" is a legal match.
-- similarly, "\<" will match the start of a word, so "/\<the\>" will match the word "the" only
+- "\\\>" matches the end of the word in searching, so ***/the\\\>*** will search for the word end with 'the' only, and will not match 'there', but "soothe" is a legal match.
+- similarly, "\\\<" will match the start of a word, so "/\\\<the\\\>" will match the word "the" only
 
 
-<r> can be :
-- a single line <line> or line range <line>,<line>
+{r} can be :
+- a single line {line} or line range {line},{line}
 - line can be '.' for current, '$' for last, '1' for first, or specified line number like 45
 - % for global, that is 1,$
 - a pattern search, like g/pattern/s/old/new/g, if the first 'g' is not given the pattern will match the first matching, other than global search
 - a pattern range, like /pattern/,/pattern/, or use % instead / for backward search
 - pattern or line can take offset like /pattern/+1 or /pattern/-2, or $-2
 - global match pattern and only replace in the matched lines
-- a mark range like 't,'b or '<,'>
+- a mark range like 't,'b or '\<,'\>
 
 ### Global command
 execute command on global matched pattern:
@@ -218,7 +218,7 @@ execute command on global matched pattern:
 ## Window
 the following table shows keys or commands used in multi-window.
 
-if it is a key, it follows <C-W>, and if it is a command, it start with :, like :close
+if it is a key, it follows {C-W}, and if it is a command, it start with :, like :close
 
 key     | action
 ------- | --------------------------------------------------------
@@ -231,7 +231,7 @@ o       | = :close
 w       | jump between window
 p       | goto previous window
 q       | = :q
-+/-/</> | adjust size of window
++/-/\</\> | adjust size of window
 =       | make all window same size
 H/J/K/L | move window to most left/buttom/top/right
 T       | move current window to new tab
@@ -239,7 +239,7 @@ f       | split window and edit file name under the cursor
 F       | split window and edit file name under the cursor and jump to the line number following the file name
 ]       | split window and jump to tag under cursor
 ^       | split window and edit alternate file
-g <C-]> | split window and do :tjump to tag under cursor
+g {C-]} | split window and do :tjump to tag under cursor
 g ]     | split window and do :tselect for tag under cursor
 h/j/k/l | move to left/buttom/top/right of current window
 n       | open new window
@@ -248,9 +248,9 @@ n       | open new window
 
 cmd          | short | action
 ------------ | ----- | ----------------------------------------
-tabedit <f>  | tabe  | edit in new tab
+tabedit {f}  | tabe  | edit in new tab
 [+-0$]tabnew | n/a   | create a new page at given position
-tab <cmd>    | n/a   | open new tab and exe <cmd>
+tab {cmd}    | n/a   | open new tab and exe {cmd}
 
 # Visual mode
 ## Common in all visual mode
@@ -285,7 +285,7 @@ after select a block:
 key | action
 --- | -------------------------------------------------------
 $   | will extend all selection to eol.
-I   | string}<esc> to insert text in each covered line
+I   | string}{esc} to insert text in each covered line
 A   | will append text in each convered line
 c   | will change selected block
 C   | will change from the selection to eol
@@ -310,19 +310,19 @@ J   | join all lines covered by selected block
 # vimdiff
 
 # Clipboard
-<m> can be:
+{m} can be:
 - h/l to copy char after/before
 - j/k to copy next/prev line and current line
 
 registers:
-- <c> named buffer from a to z
-- <C> append text to corresponding <c>
+- {c} named buffer from a to z
+- {C} append text to corresponding {c}
 - \* for current selection, only available on X-window, for WIN32 it is system clipboard
 - + system clipboard
 
 Keys    | Action
 ------- | ------------------------------------------------------------------
-<n>y<m> | copy,
+{n}y{m} | copy,
 Y       | =yy
 p       | paste after current char, or current line if targeet is line based
 P       | paste before current char, or current line if target is line based
@@ -334,21 +334,21 @@ Keys  | Action
 ----- | ----------------------------------------------
 u     | undo once
 U     | undo the modify in current line
-<c-r> | redo
-<n>.  | repeat last editing
+{c-r} | redo
+{n}.  | repeat last editing
 
 
 # ex mode
 Keys         | Action
 ------------ | ----------------------------------------------
-<n>          | print line <n>
-<m>,<n>      | print from line <m> to line <n>
+{n}          | print line {n}
+{m},{n}      | print from line {m} to line {n}
 Q            | enter ex mode
 vi           | exit ex mode and back to visual mode
-<r>d         | delete lines
-<r>m<target> | move lines
-<r>t<target> | copy lines
-<r>#         | tmp display contents
+{r}d         | delete lines
+{r}m{target} | move lines
+{r}t{target} | copy lines
+{r}#         | tmp display contents
 
 line number:
 
@@ -364,7 +364,7 @@ pattern:
 - % for 1,$, which is every line
 - symbol + and - can be used after line number
 
-<r> can be a pattern:
+{r} can be a pattern:
 - g/pattern/d will delete all lines matching the pattern
 
 # Visual Mode
@@ -377,10 +377,10 @@ O    | in block selection, move to the other end of current line
 ## set option
 ### toggle options
 Toggle options has a boolean value, to turn it on:
->:set <option>
+>:set {option}
 
 and to turn it off:
->:set no<option>
+>:set no{option}
 
 option     | short | Action
 -------    | ----- | ------------------------------------
@@ -411,22 +411,22 @@ textwidth   | tw       | max width of text line, 0 to disable
 ## command
 option        | short | action
 ------------- | ----- | ------------------------------------
-<r>!cmd       | n/a   | exe shell cmd in <r>, like 12,19!sort
+{r}!cmd       | n/a   | exe shell cmd in {r}, like 12,19!sort
 syntax        | sy    | set highlight option(enable/clear/off/manual)
-<r>TOhtml     | n/a   | turn current buffer to html file
+{r}TOhtml     | n/a   | turn current buffer to html file
 edit!         | e!    | reload last save even modified
 edit          | e     | reload if not dirty
 read          | r     | read in from some file
 next          | n     | switch to next file to edit
 previous      | prev  | switch to previous file to edit
-file <name>   | f     | rename current file
-saveas <name> | sav   | save current file as <name> and edit <name>
+file {name}   | f     | rename current file
+saveas {name} | sav   | save current file as {name} and edit {name}
 
 ## key mapping
 
 To generate a mapping list file:
 
-> :redir >> ~/mymaps.txt
+> :redir \>\> ~/mymaps.txt
 > :map
 > :redir END
 
@@ -436,10 +436,10 @@ To generate a mapping list file:
 command         | comments
 --------------- | ------------------------------------------
 options         | show all support options
-help '<option>' | show option help
-set <option>?   | query option value
-set <option>&   | set default option value
+help '{option}' | show option help
+set {option}?   | query option value
+set {option}&   | set default option value
 set all         | will display the complete list of options
-help E<errno>   | show help info for error E<errno>
-help :<cmd>     | show help info for command <cmd>
+help E{errno}   | show help info for error E{errno}
+help :{cmd}     | show help info for command {cmd}
 
