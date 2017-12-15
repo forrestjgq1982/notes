@@ -2,7 +2,7 @@
 
 tag   | description
 ---   | -----------------------------------------------------------------------
-<n>   | count, a number used to imply how many times to execute
+{n}   | count, a number used to imply how many times to execute
 <c>   | a character, from a to z
 <C>   | a character, from A to Z
 <d>   | a digit, from 0 to 9
