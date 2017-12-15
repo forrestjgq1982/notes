@@ -1,4 +1,5 @@
-
+help map-overview
+help map-modes
 
 n  y<C-G>      *@:call setreg(v:register, <SNR>96_recall())<CR>
 noxî           *@:call AutoPairsJump()<CR>
