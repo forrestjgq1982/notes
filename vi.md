@@ -1,7 +1,7 @@
 # Tags used in this document
 
 tag   | description
----   | -----------------------------------------------------------------------
+---   | ----------------------------------------------------------
 {n}   | count, a number used to imply how many times to execute
 {c}   | a character, from a to z
 {C}   | a character, from A to Z
@@ -18,33 +18,79 @@ specially, {bar} represents char '|' to avoid conflicting with table seperator.
 
 
 # Global
-Cmd | Action
---- | ------------------------------------------------------------------
+
+vim options:
+- -x encrypt file
+- -b open binary file
+
+Cmd         | Action
+---         | ------------------------------------------------------------
 scriptnames | show all \*.vim script file full path vim using
 
 # Normal mode
 ## File operation
-Keys    | Action
-----    | ----------------------------------------------
-ZZ      | = wq
-{C-^/6} | Switching back to previous file
+Keys      | Action
+-------   | ----------------------------------------------
+ZZ        | = wq
+{C-^/6}   | Switching back to previous file
+:X        | encrypt file
+:set key= | disable file encryption
 
+
+
+## View
+Keys      | Action
+--------- | ----------------------------------------------------
+{C-o/i}   | jump back/forward
+TAB       | = {C-i}
+:jumps    | list all jumpable positions
+^F, ^B    | Scroll one screen forward/backward
+^D, ^U    | Scroll half screen down/up
+^E, ^Y    | Scroll one line up/down, not quite useful and replaced by spf13
+z{cr/./-} | move current line to the top/center/bottom of screen
+zz        | = z.
+{n}z{cr}  | move line {n} to the top of screen and go to that line
+^L        | Redraw screen
+{n}{bar}  | move to column n of current line, default n==1
+`.        | move to last change in file
+'.        | move to start of line of last change in file
+`"        | move to last position of
 
 ## Motions
-Keys  | Action
-----  | ------------------------------------------------------------------
-0     | beginning of line
-^     | non-blank beginning of line
-$     | end of line
-w     | next beginning of next word, symbol not included
-W     | next beginning of next word, symbol included
-b     | prev beginning of next word, symbol not included
-B     | prev beginning of next word, symbol included
-e/E   | end of word
-(     | beginning of current sentence
-)     | beginning of next sentence
-{/}   | beginning of current /next paragraph
-[[/]] | beginning of current/next section
+Keys    | Action
+-----   | ----------------------------------------------------
+0       | beginning of line
+^       | non-blank beginning of line
+$       | end of line
+w       | next beginning of next word, symbol not included
+W       | next beginning of next word, symbol included
+b       | prev beginning of next word, symbol not included
+B       | prev beginning of next word, symbol included
+e/E     | end of word
+(       | beginning of current sentence
+)       | beginning of next sentence
+{/}     | beginning of current /next paragraph
+[[/]]   | beginning of current/next section
+gg      | move to last line
+G       | move the last line
+{n}gg/G | move to line {n}
+''      | go back to the line where gg start, or previous mark
+\`\`    | go back to the char where gg start, or previous mark
+m{c}    | mark a position
+'{c}    | move to the first char of marking position
+`{c}    | move to the marking position
+m{C}    | global mark
+'{C}    | global mark jump to line
+`{C}    | global mark jump to position
+
+The next command is not effective in spf13:
+
+Keys    | Action
+------- | --------------------------------------------------------
+H/M/L   | top/middle/last within current screen, (M seems working)
++/-     | First char of next/prev line
+ENTER=+ | seems not working
+
 
 ## Text Object
 key | object
@@ -54,45 +100,10 @@ iw  | a word without spaces after word
 as  | a sentence with spaces after word
 is  | a sentence without spaces after word
 
-## Movements
-Keys        | Action
-----        | ------------------------------------------------------------------
-w/W         | Next words header
-b/B         | Prev words header
-gg          | move to last line
-G           | move the last line
-{n}gg/G     | move to line {n}
-''          | go back to the line where gg start, or previous mark
-\`\`        | go back to the char where gg start, or previous mark
-m{c}        | mark a position
-'{c}        | move to the first char of marking position
-`{c}        | move to the marking position
-m{C}        | global mark
-'{C}        | global mark jump to line
-`{C}        | global mark jump to position
-{C-o}/{C-i} | jump back/forward
-TAB         | = {C-i}
-:jumps      | list all jumpable positions
-^F, ^B      | Scroll one screen forward/backward
-^D, ^U      | Scroll half screen down/up
-^E, ^Y      | Scroll one line up/down, not quite useful and replaced by spf13
-z{cr}/z./z- | move current line to the top/center/bottom of screen
-{n}z{cr}    | move line {n} to the top of screen and go to that line
-^L          | Redraw screen
-{n}\{bar}   | move to column n of current line, default n==1
-`.          | move to last change in file
-'.          | move to start of line of last change in file
-`"          | move to last position of
 
-The next command is not effective in spf13:
-
-Keys    | Action
-------- | ------------------------------------------------------------------
-H/M/L   | top/middle/last within current screen, (M seems working)
-+/-     | First char of next/prev line
-ENTER=+ | seems not working
 
 ## Modify
+
 ### Basic operation
 Keys | Action
 ---- | -------------------------------------------------
@@ -105,6 +116,21 @@ d    | delete some object or motion
 r    | replace current char
 R    | enter replacement mode
 ~    | change case of current char, and move to next char
+o    | insert and go to new line in insertion mode after current line
+O    | insert and go to new line in insertion mode before current line
+dd   | delete whole line(s)
+cc   | delete whole lines and enter insertion mode
+J    | join line(s)
+gu   | make lowercase
+gU   | make uppercase
+g~   | make oposite case
+guu  | lower case whole line
+gUU  | upper case whole line
+g~~  | revert case whole line
+
+
+hint:
+> {n}i/I/a/A{edit}{esc} will repeat the whole editing
 
 ### Short cut
 keys | refers to | action
@@ -116,17 +142,6 @@ x    | dl        | delete current char
 X    | dh        | delete prev char
 D    | d$        | delete to eol
 
-
-Keys                  | Action
---------------------- | --------------------------------------------------------------------------------------
-i/I/a/A               | insert or append
-{n}i/I/a/A{edit}{esc} | will repeat the whole editing
-{n}o                  | Insert and goto new line after this, if {n} \> 1, multi line share same content
-{n}O                  | Insert and goto new line before this
-{n}J                  | Join line, if {n} \> 1, it is not join {n} times, it joins {n} lines
-{n}d{m}               | delete from current char
-{n}dd                 | delete lines
-{n}D                  | =d$j{n-1}dd
 
 ### Automation
 
@@ -145,6 +160,36 @@ q{c}    | start macro recording to register {c}
 q       | end macro recording
 {n}@{c} | play recorded macro at register {c}
 {n}@@   | repeat previous @{c}
+
+### External Program
+Filter text with external program:
+>!{motion}{program}
+
+this will filter text from current line to the line {motion} locates with {program}.
+
+To filter current line only, use:
+>!!{program}
+
+For exsample, input:
+```
+!!wc vi.md
+```
+
+the current line will be replaces as:
+```
+ 457  2503 15213 vi.md
+```
+ 
+### Commands
+
+ cmd              | action
+ -------          | ------------------------------------
+ {r}m[ove] {addr} | move {r} lines below {addr}
+
+**examples:**
+
+reverse all lines:
+> :g/^/m 0
 
 ## Search and Replace
 ### Operations
@@ -190,11 +235,11 @@ Command    | Action
 ?{cr}      | repeat searching backwards
 
 commands for substitution:
-> :{r}s/old/new/[gcp]
+> :{r}s/old/new/[gcpe]
 
 here '/' is the delim to seperate command parts, but it can be any
 char else, so the next command is also legal:
-> :{r}s@old@new@[gcp]
+> :{r}s@old@new@[gcpe]
 
 word matching:
 - "\\\>" matches the end of the word in searching, so ***/the\\\>*** will search for the word end with 'the' only, and will not match 'there', but "soothe" is a legal match.
@@ -373,6 +418,28 @@ Keys | Action
 o    | switch to the other end of selection
 O    | in block selection, move to the other end of current line
 
+# Command Line Mode
+Keys         | Action
+---------    | ------------------------
+{LEFT}       | one char left
+{RIGHT}      | one char right
+{S-LEFT}     | one word left
+{S-RIGHT}    | one word right
+{C-LEFT}     | one word left
+{C-RIGHT}    | one word right
+{C-B}        | begin of command line
+{C-E}        | end of command line
+{C-H}        | delete one char before cursor
+{C-W}        | delete one word before cursor
+{C-U}        | delete whole command line text
+{TAB}        | complete to next
+{C-P}        | complete to previous
+{C-D}        | list all complete possibilities
+:hisotry [/] | show history of command line
+q:           | open history in normal mode({ENTER} to execute cursor line)
+
+
+
 # Customizing
 ## set option
 ### toggle options
@@ -442,4 +509,5 @@ set {option}&   | set default option value
 set all         | will display the complete list of options
 help E{errno}   | show help info for error E{errno}
 help :{cmd}     | show help info for command {cmd}
+{n}K            | find man page {n} for word under cursor
 
