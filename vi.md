@@ -24,10 +24,13 @@ vim options:
 - -b open binary file
 
 Cmd         | Action
----         | ------------------------------------------------------------
+----------- | -----------------------------------------------
 scriptnames | show all \*.vim script file full path vim using
+%!xxd       | convert file to a hex dump
+%!xxd -r    | convert from hex dump to normal
 
 # Normal mode
+
 ## File operation
 Keys      | Action
 -------   | ----------------------------------------------
@@ -256,6 +259,31 @@ word matching:
 - global match pattern and only replace in the matched lines
 - a mark range like 't,'b or '\<,'\>
 
+reg pattern:
+- \\\* for 0 or more
+- \\\(, \\\) for group
+- \\+ for one or more
+- \\= for zero or more
+- \\{m,n} or \\{m} for repeat for range, m or n can be absent
+- \\| for alternatives
+- [] for char range, in which 
+    + \\e for {esc}
+    + \\t for {Tab}
+    + \\r for {cr} 
+    + \\b for {BS}
+    + \\n for {LF} ???
+    + see help /[] for more
+- predefined ranges:
+    + \d for digit
+    + \x for hex digit
+    + \s for white space
+    + \l for lowercase alpha
+    + \u for uppercase alpha
+    + all ranges as capital of above add '^' of range
+    + see help /\s for more
+
+
+
 ### Global command
 execute command on global matched pattern:
 > :[range]global/{pattern}/{command}
@@ -297,7 +325,17 @@ tabedit {f}  | tabe  | edit in new tab
 [+-0$]tabnew | n/a   | create a new page at given position
 tab {cmd}    | n/a   | open new tab and exe {cmd}
 
+## auto format
+key | action
+--- | -----------------------------------------------------------------
+:set textwidth | break line automatically
+gq{m} | format lines
+:{r}center [width] | center align lines as selected range
+:{r}right [width] | right align lines as selected range
+:{r}left [indent] | left align lines as selected range
+
 # Visual mode
+
 ## Common in all visual mode
 
 key | action
@@ -313,6 +351,9 @@ U   | make uppercase
 r   | fill selection with same char
 R   | remove all lines selection covers and enter insertion mode
 J   | join all lines covered by selected block
+o   | switch to the other end of selection
+O   | in block selection, move to the other end of current line
+gv  | reselect the same area again
 ## Visual mode
 supported motions:
 >iw, aw, is, as, ip, ap
@@ -349,41 +390,62 @@ J   | join all lines covered by selected block
 
 
 
+# Insertion Mode
+
+Keys       | Action
+-----      | ----------------------------------------------
+{C-W}      | delete word before cursor
+{C-U}      | delete whole current insertion line
+{LEFT}     | one char left
+{RIGHT}    | one char right
+{S-LEFT}   | one word left
+{S-RIGHT}  | one word right
+{C-LEFT}   | one word left
+{C-RIGHT}  | one word right
+{C-B}      | begin of command line
+{C-E}      | end of command line
+{HOME}     | to start of line
+{END}      | to end of line
+{C-HOME}   | to start of file
+{C-END}    | to end of file
+{PageUp}   | whole screenful up
+{PageDown} | whole screenful down
+{C-A}      | repeat last insertion
+{C-E}      | repeat as next line under cursor
+{C-Y}      | repeat as previous line under cursor(invalid in spf-13)
+{C-R}{r}   | insert from register
+:iabbrev   | set abbreviation to word
+{C-V}      | enter special char like esc or tab
 
 
 
-# vimdiff
+Keys for completion:
 
-# Clipboard
-{m} can be:
-- h/l to copy char after/before
-- j/k to copy next/prev line and current line
+Keys       | Action
+-----      | ----------------------------------------------
+{C-N}      | next completion
+{C-P}      | previous completion
+{C-X}{key} | choose certain type of item to complete
 
-registers:
-- {c} named buffer from a to z
-- {C} append text to corresponding {c}
-- \* for current selection, only available on X-window, for WIN32 it is system clipboard
-- + system clipboard
-
-Keys    | Action
-------- | ------------------------------------------------------------------
-{n}y{m} | copy,
-Y       | =yy
-p       | paste after current char, or current line if targeet is line based
-P       | paste before current char, or current line if target is line based
-xp      | exchange 2 chars
-
-# History
+the {key} here can be:
 
 Keys  | Action
 ----- | ----------------------------------------------
-u     | undo once
-U     | undo the modify in current line
-{c-r} | redo
-{n}.  | repeat last editing
+{C-F} | file names
+{C-L} | whole lines
+{C-D} | macro definitions
+{C-I} | current and inclu
+{C-K} | words from a dict
+{C-T} | words from a thes
+{C-]} | tags
+{C-V} | Vim command line
 
 
-# ex mode
+
+
+
+# Ex Mode
+
 Keys         | Action
 ------------ | ----------------------------------------------
 {n}          | print line {n}
@@ -412,12 +474,6 @@ pattern:
 {r} can be a pattern:
 - g/pattern/d will delete all lines matching the pattern
 
-# Visual Mode
-Keys | Action
----- | ----------------------------------------------
-o    | switch to the other end of selection
-O    | in block selection, move to the other end of current line
-
 # Command Line Mode
 Keys         | Action
 ---------    | ------------------------
@@ -440,6 +496,38 @@ q:           | open history in normal mode({ENTER} to execute cursor line)
 
 
 
+# vimdiff
+
+# Clipboard
+{m} can be:
+- h/l to copy char after/before
+- j/k to copy next/prev line and current line
+
+registers:
+- {c} named buffer from a to z
+- {C} append text to corresponding {c}
+- \* for current selection, only available on X-window, for WIN32 it is system clipboard
+- + system clipboard
+
+Keys    | Action
+------- | ------------------------------------------------------------------
+{n}y{m} | copy,
+Y       | =yy
+p       | paste after current char, or current line if target is line based
+P       | paste before current char, or current line if target is line based
+xp      | exchange 2 chars
+
+# History
+
+Keys  | Action
+----- | ----------------------------------------------
+u     | undo once
+U     | undo the modify in current line
+{c-r} | redo
+{n}.  | repeat last editing
+
+
+
 # Customizing
 ## set option
 ### toggle options
@@ -452,6 +540,7 @@ and to turn it off:
 option     | short | Action
 -------    | ----- | ------------------------------------
 ignorecase | ic    | Ignore case in search pattern
+smartcase  | scs   | ignore case only if search without capital letter
 incsearch  | is    | Increment search
 hlsearch   | hls   | Highlight search
 wrap       | N/A   | Wrapping around lines
@@ -459,6 +548,9 @@ spell      | N/A   | Spell checking
 autowrite  | aw    | auto write file in file switching or making...
 wrapscan   | ws    | NOT stop at EOF in search next, or at begin of file in searching previous
 backup     | bk    | backup file before writing
+autoindent | ai    | indent automatically
+expandtab  | et    | expand tab to spaces
+linebreak  | lbr   | break line when wrap by word
 
 
 ### Value options
@@ -474,6 +566,8 @@ colorscheme | colo     | set color scheme of vim
 syntax      | syn      | set highlight option(ON/OFF) for current buffer
 patchmode   | pm       | save the original file to backup as .orig
 textwidth   | tw       | max width of text line, 0 to disable
+shiftwidth | sw | number of space used for indention
+softtabstop | sts | nmber of spaces a tab takes
 
 ## command
 option        | short | action
