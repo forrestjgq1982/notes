@@ -1,3 +1,5 @@
+# date Mon Dec 18 11:16:07 CST 2017
+# vim: set foldmarker={,} foldlevel=0 foldmethod=marker
 
 sudo apt install fbreader wget curl bison flex apvlv vim-nox vlc tmux git wine subversion python python3
 

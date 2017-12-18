@@ -32,6 +32,7 @@ scriptnames | show all \*.vim script file full path vim using
 # Normal mode
 
 ## File operation
+
 Keys      | Action
 -------   | ----------------------------------------------
 ZZ        | = wq
@@ -42,6 +43,7 @@ ZZ        | = wq
 
 
 ## View
+
 Keys      | Action
 --------- | ----------------------------------------------------
 {C-o/i}   | jump back/forward
@@ -59,7 +61,24 @@ zz        | = z.
 '.        | move to start of line of last change in file
 `"        | move to last position of
 
+folding:
+
+Keys      | Action
+--------- | ----------------------------------------------------
+zf{m|t} | create folding
+zo | open folding
+zc | close folding
+zr | reduce folding
+zm | more folding
+zR | open all folding
+zM | close all folding
+zn | disable folding
+zN | enable folding
+zi | toggle folding
+
+
 ## Motions
+
 Keys    | Action
 -----   | ----------------------------------------------------
 0       | beginning of line
@@ -96,6 +115,7 @@ ENTER=+ | seems not working
 
 
 ## Text Object
+
 key | object
 --- | ----------------------------------------------
 aw  | a word with spaces after word
@@ -108,6 +128,7 @@ is  | a sentence without spaces after word
 ## Modify
 
 ### Basic operation
+
 Keys | Action
 ---- | -------------------------------------------------
 i    | insert before curr cursor
@@ -136,6 +157,7 @@ hint:
 > {n}i/I/a/A{edit}{esc} will repeat the whole editing
 
 ### Short cut
+
 keys | refers to | action
 ---- | --------- | --------------------------------------
 s    | cl        | change current char
@@ -165,6 +187,7 @@ q       | end macro recording
 {n}@@   | repeat previous @{c}
 
 ### External Program
+
 Filter text with external program:
 >!{motion}{program}
 
@@ -195,7 +218,9 @@ reverse all lines:
 > :g/^/m 0
 
 ## Search and Replace
+
 ### Operations
+
 For search, the operations are:
 
 Keys       | Action
@@ -228,6 +253,7 @@ hint:
 >believe or not, {n}r == {n}R if only one char is replaced
 
 ### Commands
+
 commands for searching:
 
 Command    | Action
@@ -273,22 +299,27 @@ reg pattern:
     + \\b for {BS}
     + \\n for {LF} ???
     + see help /[] for more
-- predefined ranges:
-    + \d for digit
-    + \x for hex digit
-    + \s for white space
-    + \l for lowercase alpha
-    + \u for uppercase alpha
+- predefined ranges(can not be used in []):
+    + \\d for digit
+    + \\x for hex digit
+    + \\s for white space
+    + \\l for lowercase alpha
+    + \\u for uppercase alpha
+    + \\w for [a-zA-Z0-9\_]
+    + \\a for [a-zA-Z]
     + all ranges as capital of above add '^' of range
     + see help /\s for more
+- \\\_ matches anything following or a line break
 
 
 
 ### Global command
+
 execute command on global matched pattern:
 > :[range]global/{pattern}/{command}
 
 ## Window
+
 the following table shows keys or commands used in multi-window.
 
 if it is a key, it follows {C-W}, and if it is a command, it start with :, like :close
@@ -326,6 +357,7 @@ tabedit {f}  | tabe  | edit in new tab
 tab {cmd}    | n/a   | open new tab and exe {cmd}
 
 ## auto format
+
 key | action
 --- | -----------------------------------------------------------------
 :set textwidth | break line automatically
@@ -355,6 +387,7 @@ o   | switch to the other end of selection
 O   | in block selection, move to the other end of current line
 gv  | reselect the same area again
 ## Visual mode
+
 supported motions:
 >iw, aw, is, as, ip, ap
 
@@ -365,7 +398,9 @@ key | action
 ## Visual line mode
 
 ## Visual blcok mode
+
 ### operation
+
 after select a block:
 
 key | action
@@ -475,6 +510,7 @@ pattern:
 - g/pattern/d will delete all lines matching the pattern
 
 # Command Line Mode
+
 Keys         | Action
 ---------    | ------------------------
 {LEFT}       | one char left
@@ -499,6 +535,7 @@ q:           | open history in normal mode({ENTER} to execute cursor line)
 # vimdiff
 
 # Clipboard
+
 {m} can be:
 - h/l to copy char after/before
 - j/k to copy next/prev line and current line
@@ -529,8 +566,11 @@ U     | undo the modify in current line
 
 
 # Customizing
+
 ## set option
+
 ### toggle options
+
 Toggle options has a boolean value, to turn it on:
 >:set {option}
 
@@ -554,6 +594,7 @@ linebreak  | lbr   | break line when wrap by word
 
 
 ### Value options
+
 hint:
 > "set background" shall be before ":syntax enable", or "syntax reset" after setting 'background' to make Vim set the default colors again.
 
@@ -570,6 +611,7 @@ shiftwidth | sw | number of space used for indention
 softtabstop | sts | nmber of spaces a tab takes
 
 ## command
+
 option        | short | action
 ------------- | ----- | ------------------------------------
 {r}!cmd       | n/a   | exe shell cmd in {r}, like 12,19!sort
@@ -591,9 +633,22 @@ To generate a mapping list file:
 > :map
 > :redir END
 
+commands used for key mapping for different mode:
+
+cmd  | mode
+---- | -------------------------------------------
+map  | Normal, Visual and Operator-pending
+vmap | Visual
+nmap | Normal
+omap | Operator-pending
+map! | Insert and Command-line
+imap | Insert
+cmap | Command-line
+
 ## Plugins
 
 # Help
+
 command         | comments
 --------------- | ------------------------------------------
 options         | show all support options

@@ -11,23 +11,73 @@
 # all book at once if book has not been downloaded, 
 # otherwise the book will be updated
 
-if [ $# -ne 1 ]; then
-    echo "usage: $0 <nov_title>"
-    exit 2
+# no arg to update all exist
+# idx to update index
+# otherwise specify the name of book
+if [ $# -eq 0 ]; then
+    ls  target -1 | sed -r 's/^([^.]+)\.txt$/\1/' | while read id
+    do
+        sh nov.sh $id
+    done
+
+    exit 0
 fi
 
 # book title
 title=$1
+
+
+# target book catelog file, format: <book_url>\t<book_title>
+cat=catelog
+
 # book list file, format <url>\t<title>
-catelog="./idx/catelog"
+catelog="./idx/$cat"
+
+function fetch_idx() {
+    echo "Generate site catelog"
+    #sh idx.sh
+    # start page of book list
+    cnt=1
+    # end page of book list
+    max=254
+
+    # clean old history
+    rm -rf idx
+    mkdir idx
+    cd idx
+
+    while [ $cnt -lt $max ]; do
+
+        if ! [ -e allvisit_$cnt.html ]; then
+            wget www.wutuxs.com/top/allvisit_$cnt.html
+            if [ $? -ne 0 ]; then
+                echo "can not get $cnt category"
+                return 1
+            fi
+        fi
+
+        cat allvisit_$cnt.html | iconv -f GBK -t UTF8 | dos2unix | sed -nr '/class="L"/ p' | sed -r '/target/ d' |sed -r 's@^.*href="(.*)">([^<]+)<.*$@\1\t\2@' >> $cat
+
+        let "cnt=cnt+1"
+    done
+
+    cd -
+
+    return 0
+}
+
+#if [ $# -ne 1 ]; then
+#    echo "usage: $0 <nov_title>"
+#    exit 2
+#fi
+
 
 # check if book list need be updated
-if ! [ -e $catelog ]; then
-    echo "Generate site catelog"
-    sh idx.sh
+if ! [ -e $catelog ] || [ "x$title" == "xidx" ]; then
+    fetch_idx
     if [ $? -ne 0 ]; then
-        echo "get book list failed"
-        exit 3
+        echo "fetch index failed"
+        exit 1
     fi
 fi
 
@@ -128,7 +178,7 @@ do
     echo $tchapter >> $txt
 
     # formation of chapter text
-    iconv -f GBK -t UTF8 ${fname} | dos2unix | sed -nr '/dd id="contents"/, /class="share"/ p' | sed -r 's@<[^>]+>@@g' | sed -r 's@\&[0-9a-zA-Z]+;@@g' | sed -r '/^[ \t ]*$/ d' | sed -r 's/^.*$/    /' >> $txt
+    iconv -f GBK -t UTF8 ${fname} | dos2unix | sed -nr '/dd id="contents"/, /class="share"/ p' | sed -r 's@<[^>]+>@@g' | sed -r 's@\&[0-9a-zA-Z]+;@@g' | sed -r '/^[ \t ]*$/ d' | sed -r 's/^(.*)$/    \1/' >> $txt
 #    iconv -f GBK -t UTF8 ${fname} | dos2unix | sed -r '/dd id="contents"/, /class="share"/ p' | sed -r 's/<[^>]>//' | sed -r 's/&[0-9a-zA-Z]+;//' | sed -r '/^[ \t]*$/ d' >> $txt
 
 done
