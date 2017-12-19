@@ -141,7 +141,7 @@ fi
 chapters="chapters"
 
 # generate url of book chapters
-cat $bkidx | iconv -f GBK -t UTF8 | dos2unix | sed -nr '/class="L".*html/ p' | sed -r 's@^.*/([0-9]+\.html)">([^<]+)<.*$@\1\t\2@' > $chapters
+cat $bkidx | iconv -f GBK -t UTF8 | dos2unix | sed -nr '/class="L".*html/ p' | sed -r 's@^.*/([0-9]+\.html)">([^<]+)<.*$@\1\t\2@' | sed -r 's@[*?]+@~@'> $chapters
 
 # final target text file
 txt=${title}.txt
@@ -155,17 +155,17 @@ do
     # file name of this chapter
     fname=`echo $line | sed -r 's@^(.*html).*$@\1@'`
     # chapter title
-    tchapter=`echo $line | sed -r 's@^.*l +(.*)$@\1@'`
+    tchapter=`echo $line | sed -r 's@^.*html[ \t]+(.*)$@\1@' | sed -r 's@[*?]+@~@'`
 
     echo ""
     echo "file:  $fname"
     echo "title: $tchapter"
 
-    # for debug
-    #sleep 2
 
     # try download if chapter not exist
     if ! [ -e $fname ]; then
+    # for debug
+    sleep 2
         echo "Try download ${burl}${fname}"
         wget ${burl}${fname}
         if [ $? -ne 0 ]; then
