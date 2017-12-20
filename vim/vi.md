@@ -79,49 +79,98 @@ zi | toggle folding
 
 ## Motions
 
-Keys    | Action
------   | ----------------------------------------------------
-0       | beginning of line
-^       | non-blank beginning of line
-$       | end of line
-w       | next beginning of next word, symbol not included
-W       | next beginning of next word, symbol included
-b       | prev beginning of next word, symbol not included
-B       | prev beginning of next word, symbol included
-e/E     | end of word
-(       | beginning of current sentence
-)       | beginning of next sentence
-{/}     | beginning of current /next paragraph
-[[/]]   | beginning of current/next section
-gg      | move to last line
-G       | move the last line
-{n}gg/G | move to line {n}
-''      | go back to the line where gg start, or previous mark
-\`\`    | go back to the char where gg start, or previous mark
-m{c}    | mark a position
-'{c}    | move to the first char of marking position
-`{c}    | move to the marking position
-m{C}    | global mark
-'{C}    | global mark jump to line
-`{C}    | global mark jump to position
+Keys      | Action
+-----     | ----------------------------------------------------
+0         | beginning of line
+^         | non-blank beginning of line
+$         | end of line
+w         | next beginning of next word, symbol not included
+W         | next beginning of next word, symbol included
+b         | prev beginning of next word, symbol not included
+B         | prev beginning of next word, symbol included
+e/E       | end of word
+g\_       | last non-blank of line end
+(         | beginning of current sentence
+)         | beginning of next sentence
+{/}       | beginning of current /next paragraph
+[]        | backwards to previous '}' in first column
+[[        | backwards to previous '{' in first column
+][        | forwards to previous '{' in first column
+]]        | forwards to previous '}' in first column
+gg        | move to last line
+G         | move the last line
+{n}gg/G   | move to line {n}
+''        | go back to the line where gg start, or previous mark
+\`\`      | go back to the char where gg start, or previous mark
+m{c}      | mark a position
+'{c}      | move to the first char of marking position
+`{c}      | move to the marking position
+m{C}      | global mark
+'{C}      | global mark jump to line
+`{C}      | global mark jump to position
+g0/$/^    | screen line motion of 0/$/^
+{bar}     | screen colomn
+f/F{char} | search forward/backward on first occurrence
+t/T{char} | search forward/backward before first occurrence
+;         | repeat f/F/t/T
+,         | repeat f/F/t/T on opposite direction
++/- | lines downward/upward on first non-blank char
+
 
 The next command is not effective in spf13:
 
-Keys    | Action
-------- | --------------------------------------------------------
-H/M/L   | top/middle/last within current screen, (M seems working)
-+/-     | First char of next/prev line
-ENTER=+ | seems not working
+Keys      | Action
+-------   | --------------------------------------------------------
+H/M/L     | top/middle/last within current screen, (M seems working)
++/-       | First char of next/prev line
+{ENTER}=+ | seems not working
 
 
 ## Text Object
+text object start with 'i' or 'a' and followed with an object.
+
+'i' prefix is used for inner object, without object boundary,
+and 'a' includes boundaries.
+
+The object list as:
 
 key | object
 --- | ----------------------------------------------
-aw  | a word with spaces after word
-iw  | a word without spaces after word
-as  | a sentence with spaces after word
-is  | a sentence without spaces after word
+[/]  | a [] block
+(/)/b | a () block
+{/}/B | a {} block
+\</\> | a \<\> block
+t | tag block like \<a\> ... \</a\>
+w/W | word
+s | sentence
+p | paragraph
+"/'/` | a quoted string by "" or ''  or ``
+
+## Marks
+
+Jumping to a mark can be done by:
+- backtick `: exclusive marking location
+- single quote ': linewise first non-blank marking line
+
+Marks are set by ***m***. And mark can be:
+- a-z: local mark
+- A-Z0-9: global mark
+- `/': Position before last jump or last mark '/` set
+- [/]: first/last char of previously changed or yanked text
+- \<: first line or char of last selected visual area
+- \>: last line or char of last selected visual area
+- ": The position of last exit current buffer
+- ^: Position where cursor was the last time when insert mode was stopped.
+- .: Last change position
+- (: start of sentence
+- ): end of sentence
+- {: start of paragraph
+- }: end of paragraph
+
+**hint**:
+> `^ or '^ often combined with 'gi' which insert text in the same position as where insert mode was stopped last time in current buffer.
+
+command **:marks** will list all current marks
 
 
 
@@ -153,7 +202,8 @@ gUU  | upper case whole line
 g~~  | revert case whole line
 
 
-hint:
+**hint**:
+
 > {n}i/I/a/A{edit}{esc} will repeat the whole editing
 
 ### Short cut
@@ -249,7 +299,7 @@ R    | enter replace mode and replace one by one until ESC
 {n}S | delete few lines and enter insert mode
 S    | replace while line, keep it emtpy
 
-hint:
+**hint**:
 >believe or not, {n}r == {n}R if only one char is replaced
 
 ### Commands
@@ -595,7 +645,7 @@ linebreak  | lbr   | break line when wrap by word
 
 ### Value options
 
-hint:
+**hint**:
 > "set background" shall be before ":syntax enable", or "syntax reset" after setting 'background' to make Vim set the default colors again.
 
 
