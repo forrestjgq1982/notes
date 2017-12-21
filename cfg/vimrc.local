@@ -12,7 +12,7 @@ set nospell
 nmap <SPACE> <C-F>
 
 "autocmd BufEnter *.txt set guifont=Source\ Code\ Pro\12
-autocmd BufEnter *.txt set nohls wrap nonu
+autocmd BufEnter *.txt set nohls wrap nonu nolinebreak
 autocmd BufNewFile * set ff=unix
 set ff=unix
 set nospell

@@ -15,14 +15,25 @@
 # idx to update index
 # otherwise specify the name of book
 if [ $# -eq 0 ]; then
-    ls  target -1 | sed -r 's/^([^.]+)\.txt$/\1/' | while read id
+    list=`ls -1 target/ | sed -r 's/(.*)\.txt/\1/'`
+
+    for n in $list
     do
-        sh nov.sh $id
+        $0 $n
+    done
+    exit 0
+fi
+
+if [ $# -lt 1 ]; then
+    for param in $@
+    do
+        $0 $param
     done
 
     exit 0
 fi
 
+wgeto="-q"
 # book title
 title=$1
 
@@ -31,10 +42,12 @@ title=$1
 cat=catelog
 
 # book list file, format <url>\t<title>
-catelog="./idx/$cat"
+catelog=`realpath ./$cat`
 
 function fetch_idx() {
     echo "Generate site catelog"
+
+    rm -f $catelog tmpcat
     #sh idx.sh
     # start page of book list
     cnt=1
@@ -42,26 +55,36 @@ function fetch_idx() {
     max=254
 
     # clean old history
-    rm -rf idx
-    mkdir idx
-    cd idx
+
+    url="www.wutuxs.com/top"
 
     while [ $cnt -lt $max ]; do
+        web=allvisit_$cnt.html
 
-        if ! [ -e allvisit_$cnt.html ]; then
-            wget www.wutuxs.com/top/allvisit_$cnt.html
+        rm -f $web
+
+        echo "fetch index $cnt/$max"
+        if ! [ -e $web ]; then
+            wget $url/$web $wgeto
             if [ $? -ne 0 ]; then
                 echo "can not get $cnt category"
+                rm -f $web
                 return 1
             fi
         fi
 
-        cat allvisit_$cnt.html | iconv -f GBK -t UTF8 | dos2unix | sed -nr '/class="L"/ p' | sed -r '/target/ d' |sed -r 's@^.*href="(.*)">([^<]+)<.*$@\1\t\2@' >> $cat
+        if [ $cnt -eq 1 ]; then
+            max=`cat $web | iconv -f GBK -t UTF8 | dos2unix | sed -nr '/class="last"/ p' | sed -r 's/^.*class="last".([0-9]+)<.*$/\1/'`
+        fi
+
+        cat $web | iconv -f GBK -t UTF8 | dos2unix | sed -nr '/class="L"/ p' | sed -r '/target/ d' |sed -r 's@^.*href="(.*)">([^<]+)<.*$@\1\t\2@' >> tmpcat
+
+        rm -f $web
 
         let "cnt=cnt+1"
     done
-
-    cd -
+    
+    mv tmpcat $catelog
 
     return 0
 }
@@ -88,20 +111,34 @@ if [ $nrbook -eq 0 ]; then
     exit 4
 fi
 
-# more than 1 book hit
+echo "$nrbook book(s) found:"
+cat $catelog | grep "$title" | sed -r 's/^.*\t(.+)$/\1/' | cat -n
+echo ""
+
 if [ $nrbook -gt 1 ]; then
-    echo "more than 1 book hit:"
-    cat $catelog | grep "$title"
-    echo ""
-    echo "Please enter full book title"
-    exit 5
+    echo "Please choose a book, 0 for exit, 1~$nrbook for selected book index"
+    read nr
+
+
+    if [ "x$nr" == "x" ] || [ $nr -eq 0 ]; then
+        exit 0
+    fi
+
+    if [ $nr -gt $nrbook ]; then
+        echo "invalid book index $nr"
+        exit 1
+    fi
+else
+    nr=1
 fi
 
+bookinfo=`cat $catelog | grep "$title" | sed -nr "$nr p"`
+
 # book URL end with /
-burl=`cat $catelog | grep "$title" | awk '{print $1}'`
+burl=`echo $bookinfo | awk '{print $1}'`
 
 # book title(in case user input shorter title)
-title=`cat $catelog | grep "$title" | awk '{print $2}'`
+title=`echo $bookinfo | awk '{print $2}'`
 
 # book id
 bid=`echo $burl | sed -r 's@^.*/([0-9]+)/$@\1@'`
@@ -109,27 +146,41 @@ bid=`echo $burl | sed -r 's@^.*/([0-9]+)/$@\1@'`
 # book index file name
 bkidx="index.html"
 
+# last writtern chapter index, 0 for never writtern,
+# otherwise the chapter from 1
+chidx=0
+
+# file to store $chidx
+chidxfile="chidx"
+
+# chapter index file, <format: web_page_file_name>\t<chapter_title>
+chapters="chapters"
+
+
 # first checkout if novel is downloaded before or not
-if ! [ -e ./$bid/$bkidx ]; then
+if ! [ -e ./$bid/$chapters ]; then
     echo "Book not exist, download full book"
 
     rm -rf $bid
     mkdir $bid
     cd $bid
 
-    wget -r -np -nd $burl
+    wget -r -np -nd $burl $wgeto
     if [ $? -ne 0 ]; then
         echo "download full book failed"
         cd -
+        rm -rf $bid
         exit 9
     fi
+    rm -f robots.txt
+
 else
     echo "Try update books"
     cd $bid
 
     # update book index
-    rm $bkidx
-    wget "${burl}${bkidx}"
+    rm -f $bkidx
+    wget "${burl}${bkidx}" $wgeto
     if [ $? -ne 0 ]; then
         echo "download book index failed"
         cd -
@@ -137,20 +188,42 @@ else
     fi
 fi
 
-# chapter index file, <format: web_page_file_name>\t<chapter_title>
-chapters="chapters"
+if ! [ -e $chidxfile ]; then
+    echo "0" > $chidxfile
+    chidx=0
+else
+    chidx=`head -1 $chidxfile`
+fi
+
 
 # generate url of book chapters
 cat $bkidx | iconv -f GBK -t UTF8 | dos2unix | sed -nr '/class="L".*html/ p' | sed -r 's@^.*/([0-9]+\.html)">([^<]+)<.*$@\1\t\2@' | sed -r 's@[*?]+@~@'> $chapters
+
+rm -f $bkidx
 
 # final target text file
 txt=${title}.txt
 
 # clean before generate
-rm $txt
+# rm $txt
+
+if [ $chidx -eq 0 ]; then
+    rm -f $txt
+fi
+
+total=`cat $chapters | wc -l`
+if [ $chidx -ge $total ]; then
+    echo "book has no update"
+    exit 0
+fi
+let "chidx=chidx+1"
 
 # chapter by chapter
-cat $chapters | while read line
+
+cat $chapters | sed -nr "$chidx,$ p" > chtmp
+
+# we use read < chtmp here to avoid var passing fail due to pipe
+while read line
 do
     # file name of this chapter
     fname=`echo $line | sed -r 's@^(.*html).*$@\1@'`
@@ -164,13 +237,14 @@ do
 
     # try download if chapter not exist
     if ! [ -e $fname ]; then
-    # for debug
-    sleep 2
-        echo "Try download ${burl}${fname}"
-        wget ${burl}${fname}
+        # for debug
+
+        #sleep 1
+        echo "Try download $chidx/$total: ${burl}${fname}"
+        wget ${burl}${fname}  $wgeto
         if [ $? -ne 0 ]; then
-            echo "file not exist"
-            exit 7
+            echo "download fail"
+            break
         fi
     fi
 
@@ -181,7 +255,18 @@ do
     iconv -f GBK -t UTF8 ${fname} | dos2unix | sed -nr '/dd id="contents"/, /class="share"/ p' | sed -r 's@<[^>]+>@@g' | sed -r 's@\&[0-9a-zA-Z]+;@@g' | sed -r '/^[ \t ]*$/ d' | sed -r 's/^(.*)$/    \1/' >> $txt
 #    iconv -f GBK -t UTF8 ${fname} | dos2unix | sed -r '/dd id="contents"/, /class="share"/ p' | sed -r 's/<[^>]>//' | sed -r 's/&[0-9a-zA-Z]+;//' | sed -r '/^[ \t]*$/ d' >> $txt
 
-done
+    rm -f ${fname}
+    let "chidx=chidx+1"
+done < chtmp
+
+rm -f chtmp
+
+let "chidx=chidx-1"
+echo "$chidx" > $chidxfile
+
+if [ $chidx -lt $total ]; then
+    echo "only $chidx/$total chapters downloaded, please try again"
+fi
 
 cd -
 mkdir -p target
