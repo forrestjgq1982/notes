@@ -33,3 +33,9 @@ set t_Co=256
 
 set linebreak
 set ic smartcase
+map <leader>,<SPACE>/ i**<ESC>2f.i**<ESC>
+map <leader>,<SPACE>. i**<ESC>f.i**<ESC>
+map <leader>,<SPACE>, i**<ESC>f,i**<ESC>
+map <leader>,<SPACE><SPACE> i**<ESC>f i**<ESC>
+vmap <C-J> Jo<ESC>j
+nmap <leader>p ggddGddggP0xA;<ESC>:2,$s/^/> /.ggdG
