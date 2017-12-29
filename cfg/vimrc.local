@@ -39,3 +39,20 @@ map <leader>,<SPACE>, i**<ESC>f,i**<ESC>
 map <leader>,<SPACE><SPACE> i**<ESC>f i**<ESC>
 vmap <C-J> Jo<ESC>j
 nmap <leader>p ggddGddggP0xA;<ESC>:2,$s/^/> /.ggdG
+
+
+map <leader><SPACE>/ i**<ESC>2f.i**<ESC>
+map <leader><SPACE>. i**<ESC>f.i**<ESC>
+map <leader><SPACE>, i**<ESC>f,i**<ESC>
+map <leader><SPACE><SPACE> i**<ESC>f i**<ESC>
+vmap <C-J> Jo<ESC>jV
+noremap <leader>p ggddGddggP0xA:<ESC>:2,$s/^.*$/> &  /Go<ESC>ggdG
+nmap <leader><leader>s :%s/^[0-9 ]\+//g
+nmap <leader><leader>/ :%s/\\\([<>_]\)/\1/g
+nmap <leader><leader><leader> <leader><leader>s<leader><leader>/ggdd0x<leader>ccf*2a<SPACE><ESC>f*2i<SPACE><ESC>VG=
+
+nmap <leader>o bi**<ESC>/[ ().\-,]i**<ESC>/\\_
+
+set linebreak
+set ic smartcase
+set nohls
