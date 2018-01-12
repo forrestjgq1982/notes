@@ -914,6 +914,36 @@ macro eCut()
 	Cut
     _SetMarkOff()
 }
+macro eLowerCase()
+{
+	if(!_IsSelectionMultiChars())
+	{
+		select_word
+	}
+	Lowercase
+    _SetMarkOff()
+
+}
+macro eUpperCase()
+{
+	if(!_IsSelectionMultiChars())
+	{
+		select_word
+	}
+	Uppercase
+    _SetMarkOff()
+
+}
+macro eToggleCase()
+{
+	if(!_IsSelectionMultiChars())
+	{
+		select_word
+	}
+	Toggle_Case
+    _SetMarkOff()
+
+}
 macro eCopy()
 {
 	if(!_IsSelectionMultiChars())

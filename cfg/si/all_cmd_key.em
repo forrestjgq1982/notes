@@ -561,87 +561,102 @@ macro eEditCmd ()
 	var key
 	key = _InputKey()
 
+
 	/**
-     * Key: Alt+W
-     jiangg*/
-	if(key == 2135 || key == 2167) {
-		Cut_Line_Left
-		stop
-	}
-
-	/* Insert_New_Line E+B */
-	if(key == 66 || key == 98) {
-		Insert_New_Line
-		stop
-	}
-
-	/* eCopyLine E+C */
-	if(key == 67 || key == 99) {
-		eCopyLine
-		stop
-	}
-
-	/* Copy_Line_Right E+Ctrl+C */
-	if(key == 1091 || key == 1123) {
-		Copy_Line_Right
-		stop
-	}
-
-	/* Cut_Line_Right E+Ctrl+W */
-	if(key == 1111 || key == 1143) {
-		Cut_Line_Right
-		stop
-	}
-
-	/* Delete_Line E+D */
-	if(key == 68 || key == 100) {
-		Delete_Line
-		stop
-	}
-
-	/* Insert_Line E+I */
-	if(key == 73 || key == 105) {
-		Insert_Line
-		stop
-	}
-
-	/* Lowercase E+L */
-	if(key == 76 || key == 108) {
-		Lowercase
-		stop
-	}
-
-	/* Complete_Symbol E+S */
-	if(key == 83 || key == 115) {
-		Complete_Symbol
-		stop
-	}
-
-	/* Toggle_Case E+T */
-	if(key == 84 || key == 116) {
-		Toggle_Case
-		stop
-	}
-
-	/* Uppercase E+U */
-	if(key == 85 || key == 117) {
-		Uppercase
-		stop
-	}
-
-	/* Cut_Line E+W */
-	if(key == 87 || key == 119) {
-		Cut_Line
-		stop
-	}
-
-	/* eBreakToNextLine E+Ctrl+B */
+     * Key Binding: Ctrl+B 
+     * Description: Break current line, move cursor to next line
+     *              but keep column of cursor not change
+     */
 	if(key == 1090 || key == 1122) {
 		eBreakToNextLine
 		stop
 	}
 
-	/* eBreakEighty E+E */
+	/**
+	/**
+     * Key Binding: I 
+     * Description: Insert new line before this line and put cursor there
+     */
+	if(key == 73 || key == 105) {
+		Insert_Line
+		stop
+	}
+
+    /* Key Binding: B 
+     * Description: Insert NewLine after cursor and keep cursor not move
+     */
+	if(key == 66 || key == 98) {
+		Insert_New_Line
+		stop
+	}
+
+	/**
+     * Key Binding: C 
+     * Description: Copy whole line into clipboard
+     */
+	if(key == 67 || key == 99) {
+		eCopyLine
+		stop
+	}
+
+	/**
+     * Key Binding: Ctrl+C 
+     * Description: Copy right part of cursor of line into clipboard
+     */
+	if(key == 1091 || key == 1123) {
+		Copy_Line_Right
+		stop
+	}
+
+	/**
+     * Key Binding: D 
+     * Description: Delete whole line and NOT copy into clipboard
+     */
+	if(key == 68 || key == 100) {
+		Delete_Line
+		stop
+	}
+
+	/**
+     * Key Binding: S 
+     * Description: Open symbol complete list
+     */
+	if(key == 83 || key == 115) {
+		Complete_Symbol
+		stop
+	}
+
+	/**
+     * Key Binding: T 
+     * Description: Toggle case current selection or current word
+     */
+	if(key == 84 || key == 116) {
+		eToggleCase
+		stop
+	}
+
+	/**
+     * Key Binding: U 
+     * Description: Upper case current selection or current word
+     */
+	if(key == 85 || key == 117) {
+		eUppercase
+		stop
+	}
+
+	/**
+     * Key Binding: L 
+     * Description: Lower case current selection or current word
+     */
+	if(key == 76 || key == 108) {
+		eLowercase
+		stop
+	}
+
+	/**
+     * Key Binding: E 
+     * Description: Move cursor to column 80
+     */
 	if(key == 69 || key == 101) {
 		eBreakEighty
 		stop
@@ -653,73 +668,109 @@ macro eBufCmd ()
 	var key
 	key = _InputKey()
 
-	/* Exit X+Ctrl+C */
+	/**
+     * Key Binding: Ctrl+C 
+     * Description: Exit application
+     */
 	if(key == 1091 || key == 1123) {
 		Exit
 		stop
 	}
 
-	/* Save_As X+Alt+S */
+	/**
+     * Key Binding: Alt+S 
+     * Description: Save As...
+     */
 	if(key == 2131 || key == 2163) {
 		Save_As
 		stop
 	}
 
-	/* Save_All X+Ctrl+A */
+	/**
+     * Key Binding: Ctrl+A 
+     * Description: Save All buffers
+     */
 	if(key == 1089 || key == 1121) {
 		Save_All
 		stop
 	}
 
-	/* Close_All X+Ctrl+K */
+	/**
+     * Key Binding: Ctrl+K 
+     * Description: Close all buffers
+     */
 	if(key == 1099 || key == 1131) {
 		Close_All
 		stop
 	}
 
-	/* Save X+Ctrl+S */
+	/**
+     * Key Binding: Ctrl+S 
+     * Description: Save current buffer
+     */
 	if(key == 1107 || key == 1139) {
 		Save
 		stop
 	}
 
-	/* Close X+K */
+	/**
+     * Key Binding: K 
+     * Description: Close current buffer
+     */
 	if(key == 75 || key == 107) {
 		Close
 		stop
 	}
 
-	/* New X+Ctrl+N */
+	/**
+     * Key Binding: Ctrl+N 
+     * Description: Create new file buffer
+     */
 	if(key == 1102 || key == 1134) {
 		New
 		stop
 	}
 
-	/* Reload_File X+R */
+	/**
+     * Key Binding: R 
+     * Description: Reload current buffer
+     */
 	if(key == 82 || key == 114) {
 		Reload_File
 		stop
 	}
 
-	/* Show_File_Status X+S */
+	/**
+     * Key Binding: S 
+     * Description: Show file status(lines, bytes) in status line
+     */
 	if(key == 83 || key == 115) {
 		Show_File_Status
 		stop
 	}
 
-	/* Select_All X+A */
+	/**
+     * Key Binding: A 
+     * Description: Select all content of current buffer
+     */
 	if(key == 65 || key == 97) {
 		Select_All
 		stop
 	}
 
-	/* Select_Previous_Window X+B */
+	/**
+     * Key Binding: B 
+     * Description: Switch to previous window buffer
+     */
 	if(key == 66 || key == 98) {
 		Select_Previous_Window
 		stop
 	}
 
-	/* Select_Next_Window X+N */
+	/**
+     * Key Binding: N 
+     * Description: Switch to next window buffer
+     */
 	if(key == 78 || key == 110) {
 		Select_Next_Window
 		stop
@@ -731,31 +782,47 @@ macro eCmtCmd ()
 	var key
 	key = _InputKey()
 
-	/* eCommentBlock C+/ */
+	/**
+     * Key Binding: / 
+     * Description: Toggle comment for current line or 
+                    selected block with //
+     */
 	if(key == 47) {
 		eCommentBlock
 		stop
 	}
 
-	/* eCommentAllFunc C+A */
+	/**
+     * Key Binding: A 
+     * Description: Comment all functions in current buffer
+     */
 	if(key == 65 || key == 97) {
 		eCommentAllFunc
 		stop
 	}
 
-	/* eCommentFunc C+F */
+	/**
+     * Key Binding: F 
+     * Description: Comment current function
+     */
 	if(key == 70 || key == 102) {
 		eCommentFunc
 		stop
 	}
 
-	/* eAddFileHdr C+H */
+	/**
+     * Key Binding: H 
+     * Description: Add standard file header
+     */
 	if(key == 72 || key == 104) {
 		eAddFileHdr
 		stop
 	}
 
-	/* eCommentAllOpenBuf C+O */
+	/**
+     * Key Binding: O 
+     * Description: Comment all open buffer functions
+     */
 	if(key == 79 || key == 111) {
 		eCommentAllOpenBuf
 		stop
@@ -767,79 +834,118 @@ macro eWndCmd ()
 	var key
 	key = _InputKey()
 
-	/* Activate_Edit_Menu M+E */
+	/**
+     * Key Binding: E 
+     * Description: Activate Edit menu
+     */
 	if(key == 69 || key == 101) {
 		Activate_Edit_Menu
 		stop
 	}
 
-	/* Activate_File_Menu M+F */
+	/**
+     * Key Binding: F 
+     * Description: Activate File Meanu
+     */
 	if(key == 70 || key == 102) {
 		Activate_File_Menu
 		stop
 	}
 
-	/* Activate_Help_Menu M+H */
+	/**
+     * Key Binding: H 
+     * Description: Activate Help Menu
+     */
 	if(key == 72 || key == 104) {
 		Activate_Help_Menu
 		stop
 	}
 
-	/* Activate_Work_Menu M+K */
+	/**
+     * Key Binding: K 
+     * Description: Activate Work Menu
+     */
 	if(key == 75 || key == 107) {
 		Activate_Work_Menu
 		stop
 	}
 
-	/* Activate_Options_Menu M+O */
+	/**
+     * Key Binding: O 
+     * Description: Activate Options Menu
+     */
 	if(key == 79 || key == 111) {
 		Activate_Options_Menu
 		stop
 	}
 
-	/* Activate_Project_Menu M+P */
+	/**
+     * Key Binding: P 
+     * Description: Activate Project Menu
+     */
 	if(key == 80 || key == 112) {
 		Activate_Project_Menu
 		stop
 	}
 
-	/* Activate_Search_Menu M+S */
+	/**
+     * Key Binding: S 
+     * Description: Activate Search Menu
+     */
 	if(key == 83 || key == 115) {
 		Activate_Search_Menu
 		stop
 	}
 
-	/* Activate_View_Menu M+V */
+	/**
+     * Key Binding: V 
+     * Description: Activate View Menu
+     */
 	if(key == 86 || key == 118) {
 		Activate_View_Menu
 		stop
 	}
 
-	/* Activate_Window_Menu M+W */
+	/**
+     * Key Binding: W 
+     * Description: Activate Window Menu
+     */
 	if(key == 87 || key == 119) {
 		Activate_Window_Menu
 		stop
 	}
 
-	/* Activate_Symbol_Window M+L */
+	/**
+     * Key Binding: L 
+     * Description: Activate Symbol Window
+     */
 	if(key == 76 || key == 108) {
 		Activate_Symbol_Window
 		stop
 	}
 
-	/* Activate_Search_Results M+R */
+	/**
+     * Key Binding: R 
+     * Description: Activate Search Result
+     */
 	if(key == 82 || key == 114) {
 		Activate_Search_Results
 		stop
 	}
 
-	/* Display_Options M+D */
+	/**
+     * Key Binding: D 
+     * Description: Activate Display Options
+     */
 	if(key == 68 || key == 100) {
 		Display_Options
 		stop
 	}
 
-	/* Document_Options M+T */
+	/**
+     * Key Binding: T 
+     * Description: Activate Document Options
+     */
 	if(key == 84 || key == 116) {
 		Document_Options
 		stop
@@ -851,37 +957,55 @@ macro ePrjCmd ()
 	var key
 	key = _InputKey()
 
-	/* Close_Project P+C */
+	/**
+     * Key Binding: C 
+     * Description: Close current project
+     */
 	if(key == 67 || key == 99) {
 		Close_Project
 		stop
 	}
 
-	/* Remove_Project P+D */
+	/**
+     * Key Binding: D 
+     * Description: Open 'Remove Project' dialog
+     */
 	if(key == 68 || key == 100) {
 		Remove_Project
 		stop
 	}
 
-	/* New_Project P+N */
+	/**
+     * Key Binding: N 
+     * Description: Create new project
+     */
 	if(key == 78 || key == 110) {
 		New_Project
 		stop
 	}
 
-	/* Open_Project P+O */
+	/**
+     * Key Binding: O 
+     * Description: Open 'Open Project' dialog
+     */
 	if(key == 79 || key == 111) {
 		Open_Project
 		stop
 	}
 
-	/* Remove_File P+R */
+	/**
+     * Key Binding: R 
+     * Description: Open 'Remove Files' dialog
+     */
 	if(key == 82 || key == 114) {
 		Remove_File
 		stop
 	}
 
-	/* Synchronize_Files P+S */
+	/**
+     * Key Binding: S 
+     * Description: Synchronize project
+     */
 	if(key == 83 || key == 115) {
 		Synchronize_Files
 		stop
@@ -893,37 +1017,55 @@ macro eNaviCmd ()
 	var key
 	key = _InputKey()
 
-	/* Jump_To_Link N+L */
+	/**
+     * Key Binding: L 
+     * Description: Jump between current link and search result
+     */
 	if(key == 76 || key == 108) {
 		Jump_To_Link
 		stop
 	}
 
-	/* Jump_To_Match N+M */
+	/**
+     * Key Binding: M 
+     * Description: Jump to matching (), [], {}, ""
+     */
 	if(key == 77 || key == 109) {
 		Jump_To_Match
 		stop
 	}
 
-	/* Jump_To_Base_Type N+B */
+	/**
+     * Key Binding: B 
+     * Description: Jump to base type
+     */
 	if(key == 66 || key == 98) {
 		Jump_To_Base_Type
 		stop
 	}
 
-	/* Jump_To_Caller N+C */
+	/**
+     * Key Binding: C 
+     * Description: Jump to caller or open callers dialog
+     */
 	if(key == 67 || key == 99) {
 		Jump_To_Caller
 		stop
 	}
 
-	/* Jump_To_Definition N+D */
+	/**
+     * Key Binding: D 
+     * Description: Jump to definition
+     */
 	if(key == 68 || key == 100) {
 		Jump_To_Definition
 		stop
 	}
 
-	/* Jump_To_Prototype N+P */
+	/**
+     * Key Binding: P 
+     * Description: Jump to prototype
+     */
 	if(key == 80 || key == 112) {
 		Jump_To_Prototype
 		stop
