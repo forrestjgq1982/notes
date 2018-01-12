@@ -2021,11 +2021,11 @@ macro eSmartHome()
     if(sel.ichFirst == 0)
         return False
         
-    allWS = True
+    allWS = False
     
     if(_AllWsBefore(context.szLine, sel.ichFirst))
     {
-        allWS = False
+        allWS = True
     }
 
     if(allWS)

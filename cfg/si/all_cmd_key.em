@@ -1,309 +1,569 @@
+/**
+ * Install editing command
+ */
+macro _InstallEdit()
+{
+
+    /********************************************
+     *          Line Editing Command            *
+     ********************************************/
+
+    /**
+     * Swap current line with Next/Previous line
+     */
+	AssignKeyToCmd(3150, "Drag Line Down")  /* Ctrl+Alt+N */
+	AssignKeyToCmd(3152, "Drag Line Up")    /* Ctrl+Alt+P */
+
+    /**
+     * Insert new line before or after current line
+     */
+	AssignKeyToCmd(1097, "Insert Line")     /* Alt+I */
+	AssignKeyToCmd(1097, "Insert Line Before Next") /*  Ctrl+I */
+	
+
+    /**
+     * Join current and next line, the white spaces between
+     * two lines are shrinked into one space
+     */
+	AssignKeyToCmd(1098, "Join Lines") /* Ctrl+J */
+	
+
+    /**
+     * Cut the characters before or after cursor in
+     * current line, and copy into clipboard
+     */
+	AssignKeyToCmd(2123, "eKillToLineHead") /* Alt+K */
+	AssignKeyToCmd(1099, "eKillToLineEnd") /* Ctrl+K */
+	
+    
+    /**
+     * Cut current line, and copy into clipboard
+     * If there is selections across multi lines,
+     * those lines will be cut
+     */
+	AssignKeyToCmd(1109, "Cut Line") /* Ctrl+U */
+	
+
+    /********************************************
+     *          Word Editing Command            *
+     ********************************************/
+
+    /**
+     * Cut word before or after cursor and 
+     * copy into clipboard
+     */
+	AssignKeyToCmd(2056, "eKillPrevWord") /* Alt+BackSpace */
+	AssignKeyToCmd(2116, "eKillNextWord") /* Alt+D */
+	
+
+    /********************************************
+     *          Char Editing Command            *
+     ********************************************/
+
+    /**
+     * Remove one char before or after cursor,
+     * But not copy into clipboard
+     */
+	AssignKeyToCmd(8, "eRemovePrevChar") /* BackSpace */
+	AssignKeyToCmd(1092, "eRemoveNextChar") /* Ctrl+D */
+	
+
+    /**
+     * Insert a single tab forward or backward
+     * if current at least one line is selected, tab will
+     * indent selection forward or backward one tab size.
+     * if there is no selection or part of one line is selected,
+     * back tab will cancel the selection and move cursor one
+     * tab size backward, and forward selection will replace
+     * the selection if there is, and then insert a tab
+     */
+	AssignKeyToCmd(777, "Back Tab") /* Shift+Tab */
+	AssignKeyToCmd(9, "Simple Tab") /* Tab */
+	
+
+    /********************************************
+     *          Formation Editing Command       *
+     ********************************************/
+
+    /**
+     * Indent current line or selection lines left or right
+     * in the unit of tab size
+     */
+	AssignKeyToCmd(3116, "Indent Left") /* Ctrl+Alt+,(<) */
+	AssignKeyToCmd(3118, "Indent Right") /* Ctrl+Alt+.(>) */
+	
+}
+
+/**
+ * Install application view related command
+ */
+macro _InstallView()
+{
+    /**
+     * Jump to Project window to open file
+     */
+	AssignKeyToCmd(1103, "Open") /* Ctrl+O */
+
+    /**
+     * Activate symbol window
+     */
+    AssignKeyToCmd(2156, "Activate Symbol Window") /* Alt+L */
+    /**
+     * Lock or unlock context window so that it will
+     * not dynamically switch to context under cursor
+     */
+    AssignKeyToCmd(3148, "Lock Context Window") /* Ctrl+Alt+L */
+    /**
+     * Open "Key assignments" dialog
+     */
+	AssignKeyToCmd(3147, "Key Assignments") /* Ctrl+Alt+K */
+
+    /**
+     * Open "Browse Project Symbols" dialog
+     */
+	AssignKeyToCmd(2119, "Browse Project Symbols") /* Alt+G */
+
+    /**
+     * Open "Call Tree" dialog
+     */
+	AssignKeyToCmd(3156, "Generate Call Tree") /* Ctrl+Alt+T */
+	
+    /**
+     * Open "Browse Local File Symbols" dialog
+     */
+	AssignKeyToCmd(4215, "Browse Local File Symbols") /* F8 */
+	
+    /**
+     * Switch to previous buffer window
+     *
+     * If you press Ctrl and do not lease, and continue to press
+     * TAB, the window will continue to be switched backward in
+     * window list until you release Ctrl key.
+     *
+     * If you Press Ctrl and TAB, than release them all, it will 
+     * switch to previous window, and you press them again and 
+     * release, it will turn back and forth between these two
+     * windows.
+     */
+	AssignKeyToCmd(1033, "Last Window") /* Ctrl+Tab */
+	
+    /**
+     * Toggle highlight of current word
+     */
+	AssignKeyToCmd(2120, "Highlight Word") /* Alt+H */
+
+    /**
+     * Clear all highlights in current project
+     */
+	AssignKeyToCmd(3144, "Clear Highlights") /* Ctrl+Alt+H */
+
+    /**
+     * Keep the cursor position, and scroll the screen to make
+     * current line be in the top/center/bottom of screen
+     */
+	AssignKeyToCmd(1100, "eReCenterTopBottom") /* Ctrl+L */
+
+}
+
+/**
+ * Motion command installation.
+ * Here defined all movement SI can do
+ */
+macro _InstallMotion()
+{
+    /**
+     * Basic movement by direction keys
+     */
+	AssignKeyToCmd(32807, "Cursor Right") /* Right */
+	AssignKeyToCmd(32806, "Cursor Up") /* Up */
+	AssignKeyToCmd(32808, "Cursor Down") /* Down */
+	AssignKeyToCmd(32805, "Cursor Left") /* Left */
+
+    /**
+     * Move backward/forward by character
+     */
+	AssignKeyToCmd(1090, "eMoveToPrevChar") /* Ctrl+B */
+	AssignKeyToCmd(1094, "eMoveToNextChar") /* Ctrl+F */
+
+    /**
+     * Move backward/forward by word
+     */
+	AssignKeyToCmd(2114, "eMoveToPrevWord") /* Alt+B */
+	AssignKeyToCmd(2118, "eMoveToNextWord") /* Alt+F */
+
+    /**
+     * Move to beginning or end of line
+     */
+	AssignKeyToCmd(1089, "eMoveToLineHead") /* Ctrl+A */
+	AssignKeyToCmd(1093, "eMoveToLineEnd") /* Ctrl+E */
+	
+    /**
+     * If line contains only whitespaces, smart HOME or End
+     * will behave just like Move to line head or end,
+     * but if not, smart home/end will first move to the
+     * first/last non-blank head/end, and another hit of
+     * smart home/end will move to the line head/end
+     */
+	AssignKeyToCmd(32803, "eSmartEnd") /* End */
+	AssignKeyToCmd(32804, "eSmartHome") /* Home */
+
+    /**
+     * Move to previous or next line
+     */
+	AssignKeyToCmd(1104, "eMoveToPrevLine") /* Ctrl+P */
+	AssignKeyToCmd(1102, "eMoveToNextLine") /* Ctrl+N */
+
+    /**
+     * a block is something inside a pair of { and  }
+     * block up and down will jump between the start
+     * and end of block
+     */
+	AssignKeyToCmd(1883, "Block Up") /* Ctrl+Shift+[ */
+	AssignKeyToCmd(1885, "Block Down") /* Ctrl+Shift+] */
+
+    /**
+     * Jump between the start or end of ( and ) pair
+     */
+	AssignKeyToCmd(1072, "Paren Right") /* Ctrl+0 */
+	AssignKeyToCmd(1081, "Paren Left") /* Ctrl+9 */
+	
+    /**
+     * Jump to previous or next blank line
+     * a blank line is a line with only whitespace characters,
+     * or without any characters at all
+     * 
+     * This can be treated as jumping between Paragraphs
+    */
+	AssignKeyToCmd(33832, "Blank Line Down") /* Ctrl+Down */
+	AssignKeyToCmd(33830, "Blank Line Up") /* Ctrl+Up */
+
+    /**
+     * Jump to previous or next function
+     */
+	AssignKeyToCmd(3117, "Function Up") /* Ctrl+Alt+- */
+	AssignKeyToCmd(3133, "Function Down") /* Ctrl+Alt+= */
+
+    /**
+     * Screen up or down(page up or down)
+     */
+	AssignKeyToCmd(2134, "eMoveToPrevScreen") /* Alt+V */
+	AssignKeyToCmd(1110, "eMoveToNextScreen") /* Ctrl+V */
+
+    /**
+     * Move to the beginning or end of current buffer
+     */
+	AssignKeyToCmd(2876, "eMoveToBuffHead") /* Alt+Shift+< */
+	AssignKeyToCmd(2878, "eMoveToBuffEnd") /* Alt+Shift+> */
+	
+}
+/**
+ * Selection area operation command installation
+ */
+macro _InstallSelection()
+{
+
+    /**
+     * Mark is an invisible state inside this script, it
+     * represents current selection state.
+     *
+     * when it is activated by eDoMark, any motion command
+     * will create a selection area from the position where
+     * eDoMark is activated, to current cursor position.
+     *
+     * After mark is activated, another eDoMark will deactivate
+     * the mark state, and cancel the selection area if there
+     * is any.
+     */
+	AssignKeyToCmd(1101, "eDoMark") /* Ctrl+M */
+
+    /**
+     * Select current symbol or function where cursor locates,
+     * 
+     * A symbol or function is the definition you can find in 
+     * symbols list, which can be activated by Alt-L
+     *
+     * If any comment is above this definition, it will be
+     * selected along with symbol or function.
+     */
+	AssignKeyToCmd(2093, "Select Function or Symbol") /* Alt+- */
+
+    /**
+     * if current cursor is just before the left of
+     * pairs of:
+     * - ()
+     * - {}
+     * - []
+     * - ""
+     * this pair will be selected
+     */
+	AssignKeyToCmd(2109, "Select Match") /* Alt+= */
+
+    /**
+     * Select current line
+     */
+	AssignKeyToCmd(2892, "Select Line") /* Alt+Shift+L */
+	
+    /**
+     * Select current word where cursor locates
+     */
+	AssignKeyToCmd(2903, "Select Word") /* Alt+Shift+W */
+
+    /**
+     * A block is defined some tricky by SI,
+     * It can be a pair of (), a line, or a function...
+     * By Select Block, it will first select the smallest
+     * block and if you Select Block again, it will
+     * select a larger block, until thre is none.
+     */
+	AssignKeyToCmd(1069, "Select Block") /* Ctrl+- */
+	
+    /**
+     * Select a paragraph which is seperated by blank lines
+     * or lines only containing whitespaces
+     */
+	AssignKeyToCmd(1085, "Select Paragraph") /* Ctrl+= */
+	
+    /**
+     * Cancel current selection and jump to the beginning 
+     * or end of selection
+     */
+	AssignKeyToCmd(3163, "Beginning Of Selection") /* Ctrl+Alt+[ */
+	AssignKeyToCmd(3165, "End Of Selection") /* Ctrl+Alt+] */
+
+}
+/**
+ * Navigation of visited list, symbol definitions
+ */
+macro _InstallNavi()
+{
+
+    /**
+     * Jump between current position and previous position
+     * in visited list, just like execute eGoBack and eGoFwd 
+     * one by each
+     */
+	AssignKeyToCmd(2125, "Go Back Toggle") /* Alt+M */
+	
+
+    /**
+     * Jump backward or forward in visited position list
+     */
+	AssignKeyToCmd(2092, "eGoBack") /* Alt+, */
+	AssignKeyToCmd(2095, "eGoFwd") /* Alt+/ */
+
+    /**
+     * Jump to specified line you input in a dialog
+     */
+	AssignKeyToCmd(1095, "Go To Line") /* Ctrl+G */
+
+    /**
+     * Jump to definition of the symbol under cursor
+     */
+	AssignKeyToCmd(2094, "eJumpToDefinition") /* Alt+. */
+
+}
+/**
+ * Editing history command installation 
+ */
+macro _InstallHistory()
+{
+	/**
+     * eUndo will undo once change, and redo will recover 
+     * that undo.
+     *
+     * undo all will undo all changes ever made since the file
+     * is opened.
+     */
+	AssignKeyToCmd(2162, "Redo") /* Alt+R */
+	AssignKeyToCmd(1114, "eUndo") /* Ctrl+Z */
+	AssignKeyToCmd(1071, "Undo All") /* Ctrl+/ */
+	
+}
+/**
+ * Search and replace command installation
+ */
+macro _InstallSrch()
+{
+
+    /**
+     * Open search dialog
+     */
+	AssignKeyToCmd(1107, "Search") /* Ctrl+S */
+    /**
+     * Continue search backward or forward
+     */
+	AssignKeyToCmd(4210, "Search Backward") /* F3 */
+	AssignKeyToCmd(4211, "Search Forward") /* F4 */
+    
+    /**
+     * Incremental search command.
+     * Once enter Incremental search mode by F11 or F12,
+     * any input key will be searched backward/forward and
+     * cursor will locate at matched area.
+     * To leave Incremental search mode, just press ESC.
+     * To restart previous Incremental search, hit twice of
+     * F11 or F12 and continue searching.
+     */
+	AssignKeyToCmd(4218, "Incremental Search Backward") /* F11 */
+	AssignKeyToCmd(4219, "Incremental Search") /* F12 */
+
+    /**
+     * Search backward or forward for selected characters or current
+     * word under cursor if nothing is selected
+     */
+	AssignKeyToCmd(4978, "Search Backward for Selection") /* Shift+F3 */
+	AssignKeyToCmd(4979, "Search Forward for Selection") /* Shift+F4 */
+	
+    /**
+     * Search backward or forward for special tag defined by SL_TAG
+     * This is useful when automation is used in:
+     * - while statement
+     * - if statement
+     * - for statement
+     * - switch statement
+     * - comment
+     */
+	AssignKeyToCmd(2129, "eSearchPrevTag") /* Alt+Q */
+	AssignKeyToCmd(1105, "eSearchNextTag") /* Ctrl+Q */
+	
+    /**
+     * Open "Lookup References" dialog
+     */
+	AssignKeyToCmd(2131, "Lookup References") /* Alt+S */
+
+    /**
+     * Open search files dialog
+     */
+	AssignKeyToCmd(3155, "Search Files") /* Ctrl+Alt+S */
+
+    /**
+     * Jump backward or forward in the search result links
+     * If current buffer is the search result, it will jump
+     * to corresponding code.
+     *
+     * "Activate_Search_Results" will take you to search result
+     * buffer, and it is defined by "M R" now.
+     */
+	AssignKeyToCmd(1068, "Go To Previous Link") /* Ctrl+, */
+	AssignKeyToCmd(1070, "Go To Next Link") /* Ctrl+. */
+	
+    /**
+     * Open Replace dialog
+     */
+	AssignKeyToCmd(1096, "Replace") /* Ctrl+H */
+    /**
+     * Open Replace Files dialog
+     */
+	AssignKeyToCmd(1864, "Replace Files") /* Ctrl+Shift+H */
+
+}
+macro _InstallClipboard()
+{
+    /**
+     * Copy selection into clipboard.
+     *
+     * If there is no selection, the word under cursor will
+     * be copied.
+     */
+	AssignKeyToCmd(2135, "eCopy") /* Alt+W */
+	
+    /**
+     * Cut selection into clipboard.
+     *
+     * If there is no selection, the word under cursor will
+     * be cut.
+     */
+	AssignKeyToCmd(1111, "eCut") /* Ctrl+W */
+	
+    /**
+     * Paste from clipboard
+     */
+	AssignKeyToCmd(1113, "ePaste") /* Ctrl+Y */
+	
+}
+macro _InstallAutomation()
+{
+
+    /**
+     * When Enter key is pressed, and current context
+     * is a C statement like for or while..., it will
+     * automatically create the statement and put
+     * a special character to the position you are expected
+     * to fill. You can locate forward/backward by Ctrl+Q/
+     * Alt+Q to those position.
+     *
+     * Otherwise it will be treated as a normal ENTER
+     */
+	AssignKeyToCmd(13, "eAutoEnter") /* Enter */
+	
+    /**
+     * Run macro from current line. Used in debugging
+     */
+	AssignKeyToCmd(3154, "Run Macro") /* Ctrl+Alt+R */
+	
+    /**
+     * Source insight smart rename function
+     */
+	AssignKeyToCmd(1063, "Smart Rename") /* Ctrl+' */
+	
+    /**
+     * Source insight renumber function
+     */
+	AssignKeyToCmd(1106, "Renumber") /* Ctrl+R */
+	
+    /**
+     * A dialog will require you to input a #ifdef condition
+     * and current selection or current line will be 
+     * surrounded by #ifdef <condition you input> and #endif
+     */
+	AssignKeyToCmd(3145, "InsertIfdef") /* Ctrl+Alt+I */
+	
+}
 macro eInstall ()
 {
-  msg("start")
-	/* Run_Macro Ctrl+Alt+R */
-	AssignKeyToCmd(3154, "Run Macro")
+    msg("Start installation")
+
+    /***************************************************
+     *            Install Leader Keys                  *
+     ***************************************************/
+
+	AssignKeyToCmd(2117, "eEditCmd") /* Alt+E */
+	AssignKeyToCmd(2128, "ePrjCmd") /* Alt+P */
+	AssignKeyToCmd(2136, "eWndCmd") /* Alt+X */
+	AssignKeyToCmd(2126, "eNaviCmd") /* Alt+N */
+	AssignKeyToCmd(1112, "eBufCmd") /* Ctrl+X */
+	AssignKeyToCmd(2115, "eCmtCmd") /* Alt+C */
+
+    /***************************************************
+     *          Install Direct Keybindings             *
+     ***************************************************/
+    _InstallEdit()
+    _InstallMotion()
+    _InstallView()
+    _InstallSrch()
+    _InstallNavi()
+    _InstallHistory()
+    _InstallClipboard()
+    _InstallSelection()
+    _InstallAutomation()
+
+    /***************************************************
+     *              Install Misc Keys                  *
+     ***************************************************/
+
+	AssignKeyToCmd(2891, "eGetKey") /* Alt+Shift+K */
+
+    msg("Installation done!")
 
-	/* Smart_Rename Ctrl+' */
-	AssignKeyToCmd(1063, "Smart Rename")
-
-	/* Drag_Line_Down Ctrl+Alt+N */
-	AssignKeyToCmd(3150, "Drag Line Down")
-
-	/* Drag_Line_Up Ctrl+Alt+P */
-	AssignKeyToCmd(3152, "Drag Line Up")
-
-	/* Replace Ctrl+H */
-	AssignKeyToCmd(1096, "Replace")
-
-	/* Insert_Line_Before_Next Ctrl+I */
-	AssignKeyToCmd(1097, "Insert Line Before Next")
-
-	/* Join_Lines Ctrl+J */
-	AssignKeyToCmd(1098, "Join Lines")
-
-	/* Renumber Ctrl+R */
-	AssignKeyToCmd(1106, "Renumber")
-
-	/* Undo Ctrl+Z */
-	AssignKeyToCmd(1114, "Undo")
-
-	/* Indent_Right F10 */
-	AssignKeyToCmd(4217, "Indent Right")
-
-	/* Indent_Left F9 */
-	AssignKeyToCmd(4216, "Indent Left")
-
-	/* Back_Tab Shift+Tab */
-	AssignKeyToCmd(777, "Back Tab")
-
-	/* Simple_Tab Tab */
-	AssignKeyToCmd(9, "Simple Tab")
-
-	/* Open Ctrl+O */
-	AssignKeyToCmd(1103, "Open")
-
-	/* eGoBack Alt+, */
-	AssignKeyToCmd(2092, "eGoBack")
-
-	/* eJumpToDefinition Alt+. */
-	AssignKeyToCmd(2094, "eJumpToDefinition")
-
-	/* eGoFwd Alt+/ */
-	AssignKeyToCmd(2095, "eGoFwd")
-
-	/* eMoveToPrevWord Alt+B */
-	AssignKeyToCmd(2114, "eMoveToPrevWord")
-
-	/* eKillPrevWord Alt+BackSpace */
-	AssignKeyToCmd(2056, "eKillPrevWord")
-
-	/* eKillNextWord Alt+D */
-	AssignKeyToCmd(2116, "eKillNextWord")
-
-	/* eMoveToNextWord Alt+F */
-	AssignKeyToCmd(2118, "eMoveToNextWord")
-
-	/* eKillToLineHead Alt+K */
-	AssignKeyToCmd(2123, "eKillToLineHead")
-
-	/* eNaviCmd Alt+N */
-	AssignKeyToCmd(2126, "eNaviCmd")
-
-	/* ePrjCmd Alt+P */
-	AssignKeyToCmd(2128, "ePrjCmd")
-
-	/* eMoveToBuffHead Alt+Shift+< */
-	AssignKeyToCmd(2876, "eMoveToBuffHead")
-
-	/* eMoveToBuffEnd Alt+Shift+> */
-	AssignKeyToCmd(2878, "eMoveToBuffEnd")
-
-	/* eGetKey Alt+Shift+K */
-	AssignKeyToCmd(2891, "eGetKey")
-
-	/* eMoveToPrevScreen Alt+V */
-	AssignKeyToCmd(2134, "eMoveToPrevScreen")
-
-	/* eCopy Alt+W */
-	AssignKeyToCmd(2135, "eCopy")
-
-	/* eWndCmd Alt+X */
-	AssignKeyToCmd(2136, "eWndCmd")
-
-	/* eEditCmd Alt+E */
-	AssignKeyToCmd(2117, "eEditCmd")
-
-	/* eBufCmd Ctrl+X */
-	AssignKeyToCmd(1112, "eBufCmd")
-
-	/* eCmtCmd Alt+C */
-	AssignKeyToCmd(2115, "eCmtCmd")
-
-	/* eRemovePrevChar BackSpace */
-	AssignKeyToCmd(8, "eRemovePrevChar")
-
-	/* eUndo Ctrl+/ */
-	AssignKeyToCmd(1071, "eUndo")
-
-	/* eMoveToLineHead Ctrl+A */
-	AssignKeyToCmd(1089, "eMoveToLineHead")
-
-	/* InsertIfdef Ctrl+Alt+I */
-	AssignKeyToCmd(3145, "InsertIfdef")
-
-	/* eMoveToPrevChar Ctrl+B */
-	AssignKeyToCmd(1090, "eMoveToPrevChar")
-
-	/* eRemoveNextChar Ctrl+D */
-	AssignKeyToCmd(1092, "eRemoveNextChar")
-
-	/* eMoveToLineEnd Ctrl+E */
-	AssignKeyToCmd(1093, "eMoveToLineEnd")
-
-	/* eMoveToNextChar Ctrl+F */
-	AssignKeyToCmd(1094, "eMoveToNextChar")
-
-	/* eKillToLineEnd Ctrl+K */
-	AssignKeyToCmd(1099, "eKillToLineEnd")
-
-	/* eReCenterTopBottom Ctrl+L */
-	AssignKeyToCmd(1100, "eReCenterTopBottom")
-
-	/* eMoveToNextLine Ctrl+N */
-	AssignKeyToCmd(1102, "eMoveToNextLine")
-
-	/* eMoveToPrevLine Ctrl+P */
-	AssignKeyToCmd(1104, "eMoveToPrevLine")
-
-	/* eDoMark Ctrl+Shift+2 */
-	AssignKeyToCmd(1842, "eDoMark")
-
-	/* eMoveToNextScreen Ctrl+V */
-	AssignKeyToCmd(1110, "eMoveToNextScreen")
-
-	/* eCut Ctrl+W */
-	AssignKeyToCmd(1111, "eCut")
-
-	/* eBufCmd Ctrl+X */
-	AssignKeyToCmd(1112, "eBufCmd")
-
-	/* ePaste Ctrl+Y */
-	AssignKeyToCmd(1113, "ePaste")
-
-	/* eSmartEnd End */
-	AssignKeyToCmd(32803, "eSmartEnd")
-
-	/* eAutoEnter Enter */
-	AssignKeyToCmd(13, "eAutoEnter")
-
-	/* eSmartHome Home */
-	AssignKeyToCmd(32804, "eSmartHome")
-
-	/* eSearchPrevTag Alt+Q */
-	AssignKeyToCmd(2129, "eSearchPrevTag")
-
-	/* eSearchNextTag Ctrl+Q */
-	AssignKeyToCmd(1105, "eSearchNextTag")
-
-	/* Select_Function_or_Symbol Alt+- */
-	AssignKeyToCmd(2093, "Select Function or Symbol")
-
-	/* Select_Match Alt+= */
-	AssignKeyToCmd(2109, "Select Match")
-
-	/* Go_Back_Toggle Alt+M */
-	AssignKeyToCmd(2125, "Go Back Toggle")
-
-	/* Select_Line Alt+Shift+L */
-	AssignKeyToCmd(2892, "Select Line")
-
-	/* Select_Word Alt+Shift+W */
-	AssignKeyToCmd(2903, "Select Word")
-
-	/* Select_Block Ctrl+- */
-	AssignKeyToCmd(1069, "Select Block")
-
-	/* Go_To_Previous_Link Ctrl+, */
-	AssignKeyToCmd(1068, "Go To Previous Link")
-
-	/* Go_To_Next_Link Ctrl+. */
-	AssignKeyToCmd(1070, "Go To Next Link")
-
-	/* Select_Paragraph Ctrl+= */
-	AssignKeyToCmd(1085, "Select Paragraph")
-
-	/* Paren_Right Ctrl+0 */
-	AssignKeyToCmd(1072, "Paren Right")
-
-	/* Paren_Left Ctrl+9 */
-	AssignKeyToCmd(1081, "Paren Left")
-
-	/* Function_Up Ctrl+Alt+- */
-	AssignKeyToCmd(3117, "Function Up")
-
-	/* Beginning_Of_Selection Ctrl+Alt+[ */
-	AssignKeyToCmd(3163, "Beginning Of Selection")
-
-	/* End_Of_Selection Ctrl+Alt+] */
-	AssignKeyToCmd(3165, "End Of Selection")
-
-	/* Function_Down Ctrl+Alt+= */
-	AssignKeyToCmd(3133, "Function Down")
-
-	/* Blank_Line_Down Ctrl+Down */
-	AssignKeyToCmd(33832, "Blank Line Down")
-
-	/* Go_To_Line Ctrl+G */
-	AssignKeyToCmd(1095, "Go To Line")
-
-	/* Block_Up Ctrl+Shift+[ */
-	AssignKeyToCmd(1883, "Block Up")
-
-	/* Block_Down Ctrl+Shift+] */
-	AssignKeyToCmd(1885, "Block Down")
-
-	/* Blank_Line_Up Ctrl+Up */
-	AssignKeyToCmd(33830, "Blank Line Up")
-
-	/* Cursor_Down Down */
-	AssignKeyToCmd(32808, "Cursor Down")
-
-	/* Cursor_Left Left */
-	AssignKeyToCmd(32805, "Cursor Left")
-
-	/* Cursor_Right Right */
-	AssignKeyToCmd(32807, "Cursor Right")
-
-	/* Cursor_Up Up */
-	AssignKeyToCmd(32806, "Cursor Up")
-
-	/* Key_Assignments Ctrl+Alt+K */
-	AssignKeyToCmd(3147, "Key Assignments")
-
-	/* Search_Files Ctrl+Shift+F */
-	AssignKeyToCmd(1862, "Search Files")
-
-	/* Replace_Files Ctrl+Shift+H */
-	AssignKeyToCmd(1864, "Replace Files")
-
-	/* Incremental_Search_Backward F11 */
-	AssignKeyToCmd(4218, "Incremental Search Backward")
-
-	/* Incremental_Search F12 */
-	AssignKeyToCmd(4219, "Incremental Search")
-
-	/* Search_Backward F3 */
-	AssignKeyToCmd(4210, "Search Backward")
-
-	/* Search_Forward F4 */
-	AssignKeyToCmd(4211, "Search Forward")
-
-	/* Search_Backward_for_Selection Shift+F3 */
-	AssignKeyToCmd(4978, "Search Backward for Selection")
-
-	/* Search_Forward_for_Selection Shift+F4 */
-	AssignKeyToCmd(4979, "Search Forward for Selection")
-
-	/* Search Ctrl+S */
-	AssignKeyToCmd(1107, "Search")
-
-	/* Browse_Project_Symbols Alt+G */
-	AssignKeyToCmd(2119, "Browse Project Symbols")
-
-	/* Lookup_References Alt+S */
-	AssignKeyToCmd(2131, "Lookup References")
-
-	/* Generate_Call_Tree Ctrl+Alt+T */
-	AssignKeyToCmd(3156, "Generate Call Tree")
-
-	/* Browse_Local_File_Symbols F8 */
-	AssignKeyToCmd(4215, "Browse Local File Symbols")
-
-	/* Highlight_Word Alt+H */
-	AssignKeyToCmd(2120, "Highlight Word")
-
-	/* Clear_Highlights Ctrl+Alt+H */
-	AssignKeyToCmd(3144, "Clear Highlights")
-
-	/* Last_Window Ctrl+Tab */
-	AssignKeyToCmd(1033, "Last Window")
-
-	/* Indent_Left Ctrl+Alt+,(<) */
-	AssignKeyToCmd(3116, "Indent Left")
-
-	/* Indent_Right Ctrl+Alt+.(>) */
-	AssignKeyToCmd(3118, "Indent Right")
-	
-	/* Redo Alt+R */
-	AssignKeyToCmd(2162, "Redo")
 }
 macro eEditCmd ()
 {
 	var key
 	key = _InputKey()
 
-	/* Cut_Line_Left E+Alt+W */
+	/**
+     * Key: Alt+W
+     jiangg*/
 	if(key == 2135 || key == 2167) {
 		Cut_Line_Left
 		stop
