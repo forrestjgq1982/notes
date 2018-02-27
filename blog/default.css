@@ -1,0 +1,49 @@
+.dp-highlighter {font-family: "Consolas" , "Courier New" , Courier, mono, serif;font-size: 12px;background-color: #E7E5DC;width: 99%;overflow: auto;margin: 18px 0 18px 0 !important;padding-top: 1px;text-align: left;}
+
+/* clear styles */
+.dp-highlighter ol, .dp-highlighter ol li, .dp-highlighter ol li span { margin: 0; padding: 0; border: none; }
+
+.dp-highlighter a, .dp-highlighter a:hover { background: none; border: none; padding: 0; margin: 0; }
+
+.dp-highlighter ol { 
+	list-style: decimal; /* for ie */ 
+	background-color: #fff; margin: 0px 0px 1px 45px !important; /* 1px bottom margin seems to fix occasional Firefox scrolling */ 
+	padding: 0px; color: #5C5C5C; 
+	border-right:1px solid #E7E5DC;
+}
+
+.dp-highlighter.nogutter ol, .dp-highlighter.nogutter ol li { list-style: none !important; margin-left: 0px !important; }
+
+.dp-highlighter ol li, .dp-highlighter .columns div {
+    list-style: decimal-leading-zero ;
+    /* better look for others, override cascade from OL */ 
+    list-style-position: outside !important;
+    border-left: 3px solid #6CE26C;
+    background-color: #F8F8F8;
+    color: #5C5C5C;
+    padding: 0 3px 0 10px !important;
+    margin: 0 !important;
+    line-height: 150%; }
+
+.dp-highlighter.nogutter ol li, .dp-highlighter.nogutter .columns div { border: 0; }
+.dp-highlighter ol li.alt { background-color: #FFF; color: inherit; }
+.dp-highlighter ol li span { color: black; background-color: inherit; }
+
+/* Language specific styles */
+
+.dp-highlighter .comment, .dp-highlighter .comments { color: #008200; background-color: inherit; }
+.dp-highlighter .prod               { color: brown; font-weight: bold; font-size: 13px; background-color: inherit; margin-right: 3px; }
+.dp-highlighter .identity           { color: #008200;  background-color: inherit; margin-right: 0px; }
+.dp-highlighter .str                { color: #333;  background-color: yellow; margin-right: 5px; }
+.dp-highlighter .basic              { color: #0000ef;  background-color: inherit; margin-right: 0px; }
+.dp-highlighter .op                 { color: red;  font-weight: bold;background-color: inherit; margin-right: 5px; }
+.dp-highlighter .kword              { color: red;  background-color: inherit; margin-right: 5px; }
+.dp-highlighter .empty              { color: blue; font-size: 16px; font-style: italic; background-color: inherit;  }
+.dp-highlighter .indent             { color: #008200; font-weight: bold; background-color: inherit; margin-right: 8px; }
+
+.dp-highlighter .identity a         { text-decoration-line: none; color: #008200;  background-color: inherit;  }
+.dp-highlighter .identity a:link    { text-decoration-line: none; color: #008200; font-weight: bold; background-color: inherit;  }
+.dp-highlighter .identity a:visited { text-decoration-line: none; color: #008200; font-weight: bold; background-color: inherit;  }
+.dp-highlighter .identity a:hover   { text-decoration-line: none; color: white; background: green;  }
+.dp-highlighter .identity a:active  { text-decoration-line: none; color: #008200; font-weight: bold; background-color: inherit;  }
+

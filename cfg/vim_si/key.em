@@ -107,7 +107,7 @@ macro parse_f_key(key)
     var i
     var len
     //str="abcdefghijklmnopqrstuvwxyz,./;'\\[]`1234567890-="
-    str="idhepn"
+    str="/*-+"
     len = strlen(str)
     i = 0
 
